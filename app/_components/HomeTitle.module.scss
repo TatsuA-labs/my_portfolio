@@ -1,0 +1,40 @@
+.title {
+  display: flex;
+  width: 100%;
+  border: 2px solid gray;
+  height: 500px;
+}
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  width: 40%;
+  border-right: 2px solid gray;
+}
+.name {
+  animation: fadeIn 1.5s ease-in-out forwards;
+}
+.text {
+  animation: fadeIn 2.5s ease-in-out forwards;
+}
+.career {
+  margin-top: 20px;
+  text-align: right;
+  animation: fadeIn 3.5s ease-in-out forwards;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.image_wrapper {
+  position: relative;
+  width: 60%;
+}
+.image {
+  object-fit: cover;
+}
