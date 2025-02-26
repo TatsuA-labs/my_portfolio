@@ -20,7 +20,7 @@ const HomeTitle = () => {
       </div>
       <div className={styles.image_wrapper}>
         <Image
-          src="/top.jpg"
+          src="/top_image.jpg"
           alt="top image"
           fill
           className={styles.image}
