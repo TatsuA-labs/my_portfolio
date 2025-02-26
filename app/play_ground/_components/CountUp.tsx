@@ -32,14 +32,14 @@ const CountUp = () => {
   return (
     <UseServerContents title="数値の上昇の表現">
       <div className={styles.count_up}>
-      <h3>count: {Math.floor(count)}</h3>
-      <input
-        type="number"
-        onChange={handleInputChange}
-        placeholder="入力してください"
-        defaultValue={value}
-      />
-      <button onClick={() => startCountUp()}>start</button>
+        <h3>count: {Math.floor(count)}</h3>
+        <input
+          type="number"
+          onChange={handleInputChange}
+          placeholder="入力してください"
+          defaultValue={value}
+        />
+        <button onClick={() => startCountUp()}>start</button>
       </div>
     </UseServerContents>
   );
