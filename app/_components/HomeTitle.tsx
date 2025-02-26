@@ -21,7 +21,7 @@ const HomeTitle = () => {
           src="/top_image.jpg"
           alt="top image"
           fill
-          className={styles.image}
+          objectFit="cover"
           priority
         />
       </div>

@@ -35,7 +35,7 @@ const Award = () => {
             src="/award.jpg"
             alt="Award image"
             fill
-            className={styles.image}
+            objectFit="cover"
             priority
           />
         </div>
