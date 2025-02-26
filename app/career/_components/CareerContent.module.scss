@@ -1,0 +1,38 @@
+.content {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 100%;
+  gap: 20px;
+  padding: 20px;
+}
+.career_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 60%;
+}
+.link {
+  font-size: medium;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.link_icon {
+  height: 100%;
+}
+.additional {
+  display: flex;
+}
+.additional_link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+}
+.projects {
+  position: relative;
+  width: 40%;
+}

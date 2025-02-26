@@ -1,0 +1,17 @@
+.career {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  padding: 20px;
+}
+.title_wapper {
+  width: 100%;
+}
+.hr {
+  width: 100%;
+  height: 2px;
+  color: gray;
+  background-color: gray;
+}
