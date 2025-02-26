@@ -11,7 +11,7 @@ const MainAchievementCard = ({
   title,
   role,
   text,
-  image_url,
+  // image_url,
 }: MainAchievementCardProps) => {
   return (
     <div className={styles.wrapper}>

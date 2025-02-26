@@ -14,9 +14,7 @@ const HomeTitle = () => {
         <p className={styles.text}>
           高いコミニュケーション能力と、技術的好奇心でどんな案件も納期内に完了した実績
         </p>
-        <small className={styles.career}>
-          Webエンジニア Since 2021
-        </small>
+        <small className={styles.career}>Webエンジニア Since 2021</small>
       </div>
       <div className={styles.image_wrapper}>
         <Image

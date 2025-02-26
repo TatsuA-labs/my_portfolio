@@ -11,7 +11,7 @@ const SubAchievementCard = ({
   title,
   role,
   text,
-  image_url,
+  // image_url,
 }: SubAchievementCardProps) => {
   return (
     <div className={styles.wrapper}>
