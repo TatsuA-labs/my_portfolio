@@ -1,14 +1,22 @@
 {
-  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.requireConfig": true,
   "prettier.configPath": ".prettierrc.json",
-  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.addMissingInports": "always",
-    "source.fixAll.eslint": "always",
-    "source.fixAll.stylelint": "always",
+    "source.addMissingImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
-  "stylelint.validate": [
-    "scss"
-  ]
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "stylelint.validate": ["scss"]
 }
