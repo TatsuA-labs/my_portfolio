@@ -2,9 +2,9 @@ import CountUp from "@/app/play_ground/_components/CountUp";
 import TransformAnimation from "@/app/play_ground/_components/TransformAnimation";
 import styles from "@/app/play_ground/page.module.scss";
 
-const page = () => {
+const Page = () => {
   return (
-    <div className={styles.page}>
+    <div className={styles.Page}>
       <div className={styles.page_container}>
         <div className={styles.title_wrapper}>
           <h1>遊び場へようこそ！！！</h1>
@@ -21,4 +21,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import UseServerContents from "@/app/play_ground/_components/contents/UseServerContents";
+import styles from "@/app/play_ground/_components/CountUp.module.scss";
 
 const CountUp = () => {
   const [count, setCount] = useState(0);
@@ -30,14 +31,16 @@ const CountUp = () => {
   };
   return (
     <UseServerContents title="数値の上昇の表現">
-      <p>count: {Math.floor(count)}</p>
-      <input
-        type="number"
-        onChange={handleInputChange}
-        placeholder="入力してください"
-        defaultValue={value}
-      />
-      <button onClick={() => startCountUp()}>start</button>
+      <div className={styles.count_up}>
+        <h3>count: {Math.floor(count)}</h3>
+        <input
+          type="number"
+          onChange={handleInputChange}
+          placeholder="入力してください"
+          defaultValue={value}
+        />
+        <button onClick={() => startCountUp()}>start</button>
+      </div>
     </UseServerContents>
   );
 };
