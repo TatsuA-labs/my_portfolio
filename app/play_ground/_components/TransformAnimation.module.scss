@@ -1,0 +1,61 @@
+.square {
+  max-width: 250px;
+  width: 100%;
+  max-height: 250px;
+  height: 100%;
+  background-color: aquamarine;
+  animation: squreMove 3s infinite;
+}
+.triangle {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  max-width: 250px;
+  width: 100%;
+  max-height: 250px;
+  height: 100%;
+  background-color: aqua;
+  animation: triangleMove 3s infinite;
+}
+.circle {
+  max-width: 250px;
+  width: 100%;
+  max-height: 250px;
+  height: 100%;
+  border-radius: 50%;
+  background-color: bisque;
+  animation: circleMove 3s linear infinite;
+}
+@keyframes squreMove {
+  0%,
+  100% {
+    transform: translate(0, -20px); /* 左上 */
+  }
+  25% {
+    transform: translate(40px, -20px); /* 右上 */
+  }
+  50% {
+    transform: translate(40px, 20px); /* 右下 */
+  }
+  75% {
+    transform: translate(0, 20px); /* 左下 */
+  }
+}
+@keyframes triangleMove {
+  0%,
+  100% {
+    transform: translate(0, -20px); /* 上 */
+  }
+  33% {
+    transform: translate(-20px, 20px); /* 左下 */
+  }
+  66% {
+    transform: translate(20px, 20px); /* 右下 */
+  }
+}
+@keyframes circleMove {
+  0% {
+    transform: translate(0, 0) rotate(0deg) translateX(40px);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) translateX(40px);
+  }
+}
