@@ -32,7 +32,7 @@ const Award = () => {
         </div>
         <div className={styles.image_wrapper}>
           <Image
-            src="/award_2024_12_23.jpg"
+            src="/award.jpg"
             alt="Award image"
             fill
             className={styles.image}
