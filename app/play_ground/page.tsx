@@ -1,10 +1,11 @@
 import CountUp from "@/app/play_ground/_components/CountUp";
+import DamageEffect from "@/app/play_ground/_components/DamageEffect";
 import TransformAnimation from "@/app/play_ground/_components/TransformAnimation";
 import styles from "@/app/play_ground/page.module.scss";
 
 const Page = () => {
   return (
-    <div className={styles.Page}>
+    <div className={styles.page}>
       <div className={styles.page_container}>
         <div className={styles.title_wrapper}>
           <h1>遊び場へようこそ！！！</h1>
@@ -16,6 +17,7 @@ const Page = () => {
         </div>
         <TransformAnimation />
         <CountUp />
+        <DamageEffect />
       </div>
     </div>
   );
