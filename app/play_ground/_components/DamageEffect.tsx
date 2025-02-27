@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import UseServerContents from "@/app/play_ground/_components/contents/UseServerContents";
+import ContentsWrapper from "@/app/play_ground/_components/contents/ContentsWrapper";
 import styles from "@/app/play_ground/_components/DamageEffect.module.scss";
 import { getRandomInt } from "@/utils/getRandomNumber";
 
@@ -42,7 +42,7 @@ const DamageEffect = () => {
   };
 
   return (
-    <UseServerContents title="星空エフェクト" height={500}>
+    <ContentsWrapper created="2025-02-27" title="星空エフェクト" height={500}>
       <div className={styles.damage_effect}>
         {effects.map((effect) => (
           <Image
@@ -83,7 +83,7 @@ const DamageEffect = () => {
           </button>
         </div>
       </div>
-    </UseServerContents>
+    </ContentsWrapper>
   );
 };
 

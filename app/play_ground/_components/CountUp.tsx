@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import UseServerContents from "@/app/play_ground/_components/contents/UseServerContents";
+import ContentsWrapper from "@/app/play_ground/_components/contents/ContentsWrapper";
 import styles from "@/app/play_ground/_components/CountUp.module.scss";
 
 enum DisplayType {
@@ -48,7 +48,7 @@ const CountUp = () => {
   };
 
   return (
-    <UseServerContents title="数値の上昇の表現">
+    <ContentsWrapper created="2025-02-26" title="数値の上昇の表現">
       <div className={styles.count_up_wrapper}>
         <div className={styles.count_up}>
           {displayType === DisplayType.H1 && (
@@ -71,7 +71,7 @@ const CountUp = () => {
           <button onClick={() => startCountUp()}>start</button>
         </div>
       </div>
-    </UseServerContents>
+    </ContentsWrapper>
   );
 };
 

@@ -1,20 +1,23 @@
 import { ReactNode } from "react";
-import styles from "@/app/play_ground/_components/contents/UseServerContents.module.scss";
+import styles from "@/app/play_ground/_components/contents/ContentsWrapper.module.scss";
 
-type UseServerContentsProps = {
+type ContentsWrapperProps = {
   children: ReactNode;
+  created: string;
   title: string;
   isFlex?: boolean;
   height?: number;
 };
-const UseServerContents = ({
+const ContentsWrapper = ({
   children,
+  created,
   title,
   isFlex,
   height = 200,
-}: UseServerContentsProps) => {
+}: ContentsWrapperProps) => {
   return (
     <div className={styles.content_wrapper}>
+      <small>{created}</small>
       <h3>{title}</h3>
       <div
         className={`${isFlex && styles.flex_content} ${styles.content}`}
@@ -26,4 +29,4 @@ const UseServerContents = ({
   );
 };
 
-export default UseServerContents;
+export default ContentsWrapper;
