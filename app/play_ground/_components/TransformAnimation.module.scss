@@ -1,24 +1,24 @@
 .square {
-  max-width: 250px;
+  max-width: 100px;
   width: 100%;
-  max-height: 250px;
+  max-height: 100px;
   height: 100%;
   background-color: aquamarine;
   animation: squreMove 3s infinite;
 }
 .triangle {
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  max-width: 250px;
+  max-width: 100px;
   width: 100%;
-  max-height: 250px;
+  max-height: 100px;
   height: 100%;
   background-color: aqua;
   animation: triangleMove 3s infinite;
 }
 .circle {
-  max-width: 250px;
+  max-width: 100px;
   width: 100%;
-  max-height: 250px;
+  max-height: 100px;
   height: 100%;
   border-radius: 50%;
   background-color: bisque;

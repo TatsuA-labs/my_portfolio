@@ -23,6 +23,7 @@ const eslintConfig = [
     rules: {
       semi: ["error"],
       quotes: ["error", "double"],
+      "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "import/no-duplicates": "error",
       "import/order": [
