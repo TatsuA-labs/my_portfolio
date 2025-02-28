@@ -50,8 +50,8 @@ const Page = async () => {
     FrameworkSheet,
     LangSheet,
   ] = await Promise.all([
-    fetchSheetData(process.env.SHEET_ACHIEVEMENT),
     fetchSheetData(process.env.SHEET_AWARD),
+    fetchSheetData(process.env.SHEET_ACHIEVEMENT),
     fetchSheetData(process.env.SHEET_SKILL_FW),
     fetchSheetData(process.env.SHEET_SKILL_LANG),
   ]);
