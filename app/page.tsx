@@ -56,8 +56,6 @@ const Page = async () => {
     fetchSheetData(process.env.SHEET_SKILL_LANG),
   ]);
 
-  console.log(frameworks);
-
   return (
     <div className={styles.page}>
       <HomeTitle />
