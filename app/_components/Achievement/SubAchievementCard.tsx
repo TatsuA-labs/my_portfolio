@@ -4,15 +4,9 @@ type SubAchievementCardProps = {
   title: string;
   role: string;
   text: string;
-  image_url: string;
 };
 
-const SubAchievementCard = ({
-  title,
-  role,
-  text,
-  // image_url,
-}: SubAchievementCardProps) => {
+const SubAchievementCard = ({ title, role, text }: SubAchievementCardProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.info_container}>
@@ -20,15 +14,7 @@ const SubAchievementCard = ({
         <strong>ロール: {role}</strong>
         <p>{text}</p>
       </div>
-      <div className={styles.image_container}>
-        {/* <Image
-          src={image_url}
-          alt="top image"
-          fill
-          className={styles.image}
-          priority
-        /> */}
-      </div>
+      <div className={styles.image_container} />
     </div>
   );
 };

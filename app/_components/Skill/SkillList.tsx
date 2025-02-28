@@ -4,9 +4,10 @@ type Contents = {
   id: number;
   name: string;
   experience: number;
-  usedYear: string;
+  usedYear: number;
   usedVersion?: string;
 };
+
 type SlillListProps = {
   title: string;
   contents: Contents[];
