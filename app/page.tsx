@@ -6,66 +6,67 @@ import styles from "@/app/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
 
 export type AwardSheet = {
-  data: {
-    id: number;
-    date: string;
-    title: string;
-    description: string;
-    comment: string;
-  }[];
+	data: {
+		id: number;
+		date: string;
+		title: string;
+		description: string;
+		comment: string;
+	}[];
 };
 
 export type AchievementSheet = {
-  data: {
-    id: number;
-    isMain: boolean;
-    title: string;
-    role: string;
-    text: string;
-  }[];
+	data: {
+		id: number;
+		isMain: boolean;
+		title: string;
+		role: string;
+		text: string;
+	}[];
 };
 
 export type FrameworkSheet = {
-  data: {
-    id: number;
-    name: string;
-    experience: number;
-    usedYear: number;
-    usedVersion: string;
-  }[];
+	data: {
+		id: number;
+		name: string;
+		experience: number;
+		usedYear: number;
+		usedVersion: string;
+	}[];
 };
 
 export type LangSheet = {
-  data: {
-    id: number;
-    name: string;
-    experience: number;
-    usedYear: number;
-  }[];
+	data: {
+		id: number;
+		name: string;
+		experience: number;
+		usedYear: number;
+	}[];
 };
-const Page = async () => {
-  const [awards, achievements, frameworks, langs]: [
-    AwardSheet,
-    AchievementSheet,
-    FrameworkSheet,
-    LangSheet,
-  ] = await Promise.all([
-    fetchSheetData(process.env.SHEET_AWARD),
-    fetchSheetData(process.env.SHEET_ACHIEVEMENT),
-    fetchSheetData(process.env.SHEET_SKILL_FW),
-    fetchSheetData(process.env.SHEET_SKILL_LANG),
-  ]);
 
-  return (
-    <div className={styles.page}>
-      <HomeTitle />
-      <div className={styles.contents}>
-        <Award awards={awards} />
-        <Achievement achievements={achievements} />
-        <Skill frameworks={frameworks} langs={langs} />
-      </div>
-    </div>
-  );
+const Page = async () => {
+	const [awards, achievements, frameworks, langs]: [
+		AwardSheet,
+		AchievementSheet,
+		FrameworkSheet,
+		LangSheet,
+	] = await Promise.all([
+		fetchSheetData(process.env.SHEET_AWARD),
+		fetchSheetData(process.env.SHEET_ACHIEVEMENT),
+		fetchSheetData(process.env.SHEET_SKILL_FW),
+		fetchSheetData(process.env.SHEET_SKILL_LANG),
+	]);
+
+	return (
+		<div className={styles.page}>
+			<HomeTitle />
+			<div className={styles.contents}>
+				<Award awards={awards} />
+				<Achievement achievements={achievements} />
+				<Skill frameworks={frameworks} langs={langs} />
+			</div>
+		</div>
+	);
 };
 
 export default Page;
