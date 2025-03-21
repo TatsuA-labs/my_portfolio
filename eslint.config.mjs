@@ -15,15 +15,9 @@ const eslintConfig = [
   ...compat.config({
     extends: [
       "next/core-web-vitals",
-      "next/typescript",
-      "eslint:recommended",
-      "prettier"
     ],
-    plugins: ["@typescript-eslint", "import", "no-relative-import-paths", "unused-imports"],
+    plugins: ["import", "no-relative-import-paths", "unused-imports"],
     rules: {
-      semi: ["error"],
-      quotes: ["error", "double"],
-      "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "import/no-duplicates": "error",
       "import/order": [
