@@ -8,7 +8,7 @@ const Header = () => {
 				<LinkButton href="/" title="Home" />
 				<LinkButton href="/career" title="Career" />
 				<LinkButton href="/play_ground" title="Play Ground" />
-				<LinkButton href="/contact" title="Contact" />
+				{/* <LinkButton href="/contact" title="Contact" /> */}
 			</nav>
 		</header>
 	);
