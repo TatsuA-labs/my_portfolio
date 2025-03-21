@@ -36,8 +36,6 @@ const Page = async () => {
 		fetchSheetData(process.env.SHEET_SKILL_LANG),
 	]);
 
-	console.log(careers);
-	console.log(schools);
 	return (
 		<div className={styles.career}>
 			<h1>職歴・学歴</h1>
