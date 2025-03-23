@@ -1,12 +1,8 @@
 import CareerContent from "@/app/career/_components/CareerContent";
+import SchoolContent from "@/app/career/_components/SchoolContent";
 import styles from "@/app/career/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
-
-export type Additional = {
-	id: number;
-	title: string;
-	linkUrl?: string;
-};
+import { parseAdditional, parseProject } from "@/utils/parseSheetData";
 
 export type CareerSheet = {
 	data: {
@@ -15,8 +11,8 @@ export type CareerSheet = {
 		term: string;
 		role: string;
 		linkUrl: string;
-		projects: string[];
-		additionals: Additional[];
+		projects: string;
+		additionals: string;
 	}[];
 };
 
@@ -26,14 +22,14 @@ export type SchoolSheet = {
 		name: string;
 		term: string;
 		linkUrl: string;
-		additionals?: Additional[];
+		additionals: string;
 	}[];
 };
 
 const Page = async () => {
 	const [careers, schools]: [CareerSheet, SchoolSheet] = await Promise.all([
-		fetchSheetData(process.env.SHEET_SKILL_FW),
-		fetchSheetData(process.env.SHEET_SKILL_LANG),
+		fetchSheetData(process.env.SHEET_CAREER),
+		fetchSheetData(process.env.SHEET_SCHOOL),
 	]);
 
 	return (
@@ -43,28 +39,30 @@ const Page = async () => {
 				<h2>職歴</h2>
 				<hr className={styles.hr} />
 			</div>
-			{careers.data.map((career) => (
-				<CareerContent
-					key={career.id}
-					term={career.term}
-					name={career.name}
-					role={career.role}
-					linkUrl={career.linkUrl}
-					additionals={career.additionals}
-					projects={career.projects}
-				/>
-			))}
+			{careers.data?.map((career) => {
+				return (
+					<CareerContent
+						key={career.id}
+						term={career.term}
+						name={career.name}
+						role={career.role}
+						linkUrl={career.linkUrl}
+						additionals={parseAdditional(career.additionals)}
+						projects={parseProject(career.projects)}
+					/>
+				);
+			})}
 			<div className={styles.title_wapper}>
 				<h2>学歴</h2>
 				<hr className={styles.hr} />
 			</div>
-			{schools.data.map((school) => (
-				<CareerContent
+			{schools.data?.map((school) => (
+				<SchoolContent
 					key={school.id}
-					term={school.term}
 					name={school.name}
+					term={school.term}
 					linkUrl={school.linkUrl}
-					additionals={school.additionals}
+					additionals={parseAdditional(school.additionals)}
 				/>
 			))}
 		</div>
