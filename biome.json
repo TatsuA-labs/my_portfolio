@@ -12,10 +12,11 @@
 	"formatter": {
 		"enabled": true,
 		"ignore": [".next", "node_modules"],
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"indentWidth": 2
 	},
 	"organizeImports": {
-		"enabled": true
+		"enabled": false
 	},
 	"linter": {
 		"enabled": true,
