@@ -1,13 +1,19 @@
-import Link from "next/link";
 import styles from "@/app/career/_components/CareerContent.module.scss";
-import type { Additional } from "@/app/career/page";
+import ContentsAdditonal from "@/app/career/_components/ContentsAdditonal";
+import ContentsTitle from "@/app/career/_components/ContentsTitle";
+import ContentWrapper from "@/app/career/_components/ContentWrapper";
+
+type Additional = {
+	title: string;
+	linkUrl: string;
+};
 
 type CareerContentProps = {
 	term: string;
 	name: string;
 	role?: string;
 	linkUrl?: string;
-	additionals?: Additional[];
+	additionals: Additional[];
 	projects?: string[];
 };
 const CareerContent = ({
@@ -19,35 +25,12 @@ const CareerContent = ({
 	projects,
 }: CareerContentProps) => {
 	return (
-		<div className={styles.content}>
+		<ContentWrapper>
 			<div className={styles.career_info}>
-				<small>{term}</small>
-				{linkUrl ? (
-					<Link
-						className={styles.link}
-						href={linkUrl}
-						target="_blank"
-						rel="noopener"
-					>
-						{name}
-					</Link>
-				) : (
-					<p className={styles.link}>{name}</p>
-				)}
+				<ContentsTitle term={term} name={name} linkUrl={linkUrl} />
 				<strong>担当業務</strong>
 				{role && <p>{role}</p>}
-				<strong>その他</strong>
-				{additionals?.map((additional) => (
-					<div className={styles.additional} key={additional.id}>
-						{additional.linkUrl ? (
-							<div className={styles.additional_link}>
-								<Link href={additional.linkUrl}>{additional.title}</Link>
-							</div>
-						) : (
-							additional.title
-						)}
-					</div>
-				))}
+				<ContentsAdditonal additionals={additionals} />
 			</div>
 			{projects && (
 				<div className={styles.projects}>
@@ -63,7 +46,7 @@ const CareerContent = ({
 					</ul>
 				</div>
 			)}
-		</div>
+		</ContentWrapper>
 	);
 };
 
