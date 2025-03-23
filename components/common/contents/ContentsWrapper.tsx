@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "@/app/play_ground/_components/contents/ContentsWrapper.module.scss";
+import styles from "@/components/common/contents/ContentsWrapper.module.scss";
 
 type ContentsWrapperProps = {
 	children: ReactNode;

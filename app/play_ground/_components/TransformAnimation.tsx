@@ -1,5 +1,5 @@
-import ContentsWrapper from "@/app/play_ground/_components/contents/ContentsWrapper";
 import styles from "@/app/play_ground/_components/TransformAnimation.module.scss";
+import ContentsWrapper from "@/components/common/contents/ContentsWrapper";
 
 const TransformAnimation = () => {
 	return (
