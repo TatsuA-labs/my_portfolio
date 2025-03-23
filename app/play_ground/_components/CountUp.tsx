@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ContentsWrapper from "@/app/play_ground/_components/contents/ContentsWrapper";
 import styles from "@/app/play_ground/_components/CountUp.module.scss";
+import ContentsWrapper from "@/components/common/contents/ContentsWrapper";
 
 enum DisplayType {
 	P = "P",
