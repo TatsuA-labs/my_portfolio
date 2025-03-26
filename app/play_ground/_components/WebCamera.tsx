@@ -1,28 +1,26 @@
 "use client";
-import ContentsWrapper from "@/components/common/contents/ContentsWrapper";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/play_ground/_components/WebCamera.module.scss";
+import ContentsWrapper from "@/components/common/contents/ContentsWrapper";
 
 const WebCameraTest = () => {
-	const constraints = {
-		audio: false,
-		video: {
-			width: 1000,
-			height: 500,
-		},
-	};
-
 	const videoRef = useRef<HTMLVideoElement>(null);
-	//カメラとマイクのon/offボタンのstateを管理
 	const [cameraState, setCameraState] = useState(false);
 
-	//カメラのon/offボタンの実装
 	useEffect(() => {
-		navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-			if (videoRef.current === null) return;
-			videoRef.current.srcObject = cameraState ? stream : null;
-		});
+		navigator.mediaDevices
+			.getUserMedia({
+				audio: false,
+				video: {
+					width: 1000,
+					height: 500,
+				},
+			})
+			.then((stream) => {
+				if (videoRef.current === null) return;
+				videoRef.current.srcObject = cameraState ? stream : null;
+			});
 	}, [cameraState]);
 
 	return (
