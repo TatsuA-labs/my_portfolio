@@ -1,5 +1,6 @@
 import CountUp from "@/app/play_ground/_components/CountUp";
 import DamageEffect from "@/app/play_ground/_components/DamageEffect";
+import WebCamera from "@/app/play_ground/_components/WebCamera";
 import TransformAnimation from "@/app/play_ground/_components/TransformAnimation";
 import styles from "@/app/play_ground/page.module.scss";
 
@@ -18,6 +19,7 @@ const Page = () => {
 				<TransformAnimation />
 				<CountUp />
 				<DamageEffect />
+				<WebCamera />
 			</div>
 		</div>
 	);
