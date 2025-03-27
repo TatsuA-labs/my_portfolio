@@ -16,13 +16,28 @@ const WebCameraTest = () => {
 	const videoRef = useRef<HTMLVideoElement>(null);
 	//カメラとマイクのon/offボタンのstateを管理
 	const [cameraState, setCameraState] = useState(false);
+	const [isAccessToCamera, setIsAccessToCamera] = useState(true);
 
 	//カメラのon/offボタンの実装
 	useEffect(() => {
-		navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-			if (videoRef.current === null) return;
-			videoRef.current.srcObject = cameraState ? stream : null;
-		});
+		const accessToCamera = async () => {
+			try {
+				const stream = await navigator.mediaDevices.getUserMedia({
+					audio: false,
+					video: {
+						width: 1000,
+						height: 500,
+					},
+				});
+				if (videoRef.current === null) return;
+				videoRef.current.srcObject = cameraState ? stream : null;
+			} catch (error) {
+				console.error(error);
+				setIsAccessToCamera(false);
+			}
+		};
+
+		accessToCamera();
 	}, [cameraState]);
 
 	return (
@@ -32,19 +47,25 @@ const WebCameraTest = () => {
 			height={600}
 		>
 			<div className={styles.camera_wrapper}>
-				<video
-					ref={videoRef}
-					id="local-video"
-					autoPlay
-					playsInline
-					muted
-					width={1200}
-					height={500}
-				/>
-				<br />
-				<button type="button" onClick={() => setCameraState(!cameraState)}>
-					カメラ
-				</button>
+				{isAccessToCamera ? (
+					<>
+						<video
+							ref={videoRef}
+							id="local-video"
+							autoPlay
+							playsInline
+							muted
+							width={1200}
+							height={500}
+						/>
+						<br />
+						<button type="button" onClick={() => setCameraState(!cameraState)}>
+							カメラ
+						</button>
+					</>
+				) : (
+					<p>カメラに接続できませんでした。</p>
+				)}
 			</div>
 		</ContentsWrapper>
 	);
