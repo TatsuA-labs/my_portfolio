@@ -1,5 +1,5 @@
-import CareerContent from "@/app/career/_components/CareerContent";
-import SchoolContent from "@/app/career/_components/SchoolContent";
+import CareerContent from "@/app/career/_domain/CareerContent";
+import SchoolContent from "@/app/career/_domain/SchoolContent";
 import styles from "@/app/career/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
 import { parseAdditional, parseProject } from "@/utils/parseSheetData";
