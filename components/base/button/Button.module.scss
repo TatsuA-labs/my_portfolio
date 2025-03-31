@@ -1,0 +1,39 @@
+.button {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  
+}
+.primary {
+  background-color: white;
+  &:hover {
+    transition: background-color 0.5s;
+    background-color: lightgrey;
+  }
+  &:active {
+    transition: background-color 0.3s;
+    background-color: lightgrey;
+    opacity: 0.5;
+  }
+}
+.secondary {
+  background-color: lightgrey;
+  &:hover {
+    transition: background-color 0.5s;
+    background-color: white;
+  }
+  &:active {
+    transition: background-color 0.3s;
+    background-color: white;
+    opacity: 0.5;
+  }
+}

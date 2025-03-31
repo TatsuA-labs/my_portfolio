@@ -1,12 +1,12 @@
 import styles from "@/app/about_site/Page.module.scss";
-import ContentsWrapper from "@/components/common/contents/ContentsWrapper";
+import ContentCard from "@/components/base/Card/ContentCard";
 
 const Page = () => {
 	return (
 		<div className={styles.page}>
 			<div className={styles.page_container}>
 				<h1>このサイトについて</h1>
-				<ContentsWrapper created="2025-03-23" title="" isFlex={false}>
+				<ContentCard created="2025-03-23" title="" isFlex={false}>
 					<div className={styles.title_wrapper}>
 						<h3>ポートフォリオサイトとしての役割</h3>
 						<p>
@@ -18,8 +18,8 @@ const Page = () => {
 							また、極力ライブラリを使わずに実装することを目指しています。
 						</p>
 					</div>
-				</ContentsWrapper>
-				<ContentsWrapper
+				</ContentCard>
+				<ContentCard
 					created="2025-03-23"
 					title="本サイトを構成する技術"
 					isFlex={true}
@@ -74,7 +74,7 @@ const Page = () => {
 							<li>Next.jsデプロイが簡単で、無料で使える。</li>
 						</ul>
 					</div>
-				</ContentsWrapper>
+				</ContentCard>
 			</div>
 		</div>
 	);

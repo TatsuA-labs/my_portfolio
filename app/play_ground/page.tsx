@@ -1,7 +1,4 @@
-import CountUp from "@/app/play_ground/_components/CountUp";
-import DamageEffect from "@/app/play_ground/_components/DamageEffect";
-import WebCamera from "@/app/play_ground/_components/WebCamera";
-import TransformAnimation from "@/app/play_ground/_components/TransformAnimation";
+import ContentsList from "@/app/play_ground/_domain/ContentsList";
 import styles from "@/app/play_ground/page.module.scss";
 
 const Page = () => {
@@ -16,10 +13,7 @@ const Page = () => {
 						そのため見やすさ等は二の次なので閲覧する際はご了承いただけると幸いです。
 					</p>
 				</div>
-				<TransformAnimation />
-				<CountUp />
-				<DamageEffect />
-				<WebCamera />
+				<ContentsList />
 			</div>
 		</div>
 	);

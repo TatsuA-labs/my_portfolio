@@ -1,7 +1,7 @@
-import Achievement from "app/_components/Achievement/Achievement";
-import HomeTitle from "app/_components/HomeTitle";
-import Award from "@/app/_components/Award/Award";
-import Skill from "@/app/_components/Skill/Skill";
+import Achievement from "app/_domain/Achievement/Achievement";
+import HomeTitle from "app/_domain/HomeTitle";
+import Award from "@/app/_domain/Award/Award";
+import Skill from "@/app/_domain/Skill/Skill";
 import styles from "@/app/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
 
