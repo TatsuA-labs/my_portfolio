@@ -1,6 +1,6 @@
 "use client";
 import type React from "react";
-import ContentCard from "@/components/base/Card1/ContentCard";
+import ContentCard from "@/components/base/Card/ContentCard";
 import Spinner from "@/components/base/Spinner/Spinner";
 
 const OriginalSpinner = () => {

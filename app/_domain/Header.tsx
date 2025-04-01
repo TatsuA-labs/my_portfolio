@@ -1,5 +1,5 @@
 import styles from "@/app/_domain/Header.module.scss";
-import LinkButton from "@/components/base/Button1/LinkButton";
+import LinkButton from "@/components/base/Button/LinkButton";
 
 const Header = () => {
 	return (

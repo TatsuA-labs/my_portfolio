@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/play_ground/_domain/DamageEffect/DamageEffect.module.scss";
-import Button from "@/components/base/Button1/Button";
-import ContentCard from "@/components/base/Card1/ContentCard";
+import Button from "@/components/base/Button/Button";
+import ContentCard from "@/components/base/Card/ContentCard";
 import { getRandomInt } from "@/utils/getRandomNumber";
 
 type Effects = {

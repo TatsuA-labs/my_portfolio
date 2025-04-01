@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/app/play_ground/_domain/Dialog/GlobalDialog.module.scss";
-import Button from "@/components/base/Button1/Button";
-import ContentCard from "@/components/base/Card1/ContentCard";
+import Button from "@/components/base/Button/Button";
+import ContentCard from "@/components/base/Card/ContentCard";
 import MessageDialog from "@/components/case/Dialog/MessageDialog";
 import { useModal } from "@/hooks/useModal";
 

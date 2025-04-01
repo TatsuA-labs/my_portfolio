@@ -1,5 +1,5 @@
 import styles from "@/app/play_ground/_domain/TransformAnimation/TransformAnimation.module.scss";
-import ContentCard from "@/components/base/Card1/ContentCard";
+import ContentCard from "@/components/base/Card/ContentCard";
 
 const TransformAnimation = () => {
 	return (
