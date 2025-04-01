@@ -1,4 +1,4 @@
-import styles from "@/components/base/button/Button.module.scss";
+import styles from "@/components/base/Button/Button.module.scss";
 
 type LinkButtonProps = {
 	onClick?: () => void;
