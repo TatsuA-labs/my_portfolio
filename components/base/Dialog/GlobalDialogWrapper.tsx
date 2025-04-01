@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/base/Button1/Button";
 import styles from "@/components/base/Dialog/GlobalDialogWrapper.module.scss";
 import { useModalStore } from "@/stores/modalStore";
 import ReactDOM from "react-dom";

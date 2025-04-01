@@ -2,8 +2,8 @@
 import { useState } from "react";
 import styles from "@/app/play_ground/_domain/CountUp/CountUp.module.scss";
 import CountUpText from "@/app/play_ground/_domain/CountUp/CountUpText";
-import Button from "@/components/base/Button/Button";
-import ContentCard from "@/components/base/Card/ContentCard";
+import Button from "@/components/base/Button1/Button";
+import ContentCard from "@/components/base/Card1/ContentCard";
 
 export enum DisplayType {
 	H1 = "H1",

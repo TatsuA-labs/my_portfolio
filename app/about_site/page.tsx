@@ -1,5 +1,5 @@
 import styles from "@/app/about_site/Page.module.scss";
-import ContentCard from "@/components/base/Card/ContentCard";
+import ContentCard from "@/components/base/Card1/ContentCard";
 
 const Page = () => {
 	return (

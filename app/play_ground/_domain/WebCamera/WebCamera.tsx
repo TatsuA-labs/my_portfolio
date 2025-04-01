@@ -2,8 +2,8 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/play_ground/_domain/WebCamera/WebCamera.module.scss";
-import Button from "@/components/base/Button/Button";
-import ContentCard from "@/components/base/Card/ContentCard";
+import Button from "@/components/base/Button1/Button";
+import ContentCard from "@/components/base/Card1/ContentCard";
 
 const WebCameraTest = () => {
 	const constraints = {

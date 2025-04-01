@@ -1,4 +1,4 @@
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/base/Button1/Button";
 import { useModalStore } from "@/stores/modalStore";
 import styles from "@/components/case/Dialog/MessageDialo.module.scss";
 

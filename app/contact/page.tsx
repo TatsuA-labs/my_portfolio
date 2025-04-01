@@ -1,5 +1,5 @@
 import styles from "@/app/contact/page.module.scss";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/base/Button1/Button";
 
 const Page = () => {
 	return (
