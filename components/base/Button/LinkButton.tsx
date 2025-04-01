@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "@/components/base/button/LinkButton.module.scss";
+import styles from "@/components/base/Button/LinkButton.module.scss";
 
 type LinkButtonProps = {
 	href: string;

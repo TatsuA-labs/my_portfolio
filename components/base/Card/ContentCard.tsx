@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "@/components/base/card/ContentCard.module.scss";
+import styles from "@/components/base/Card/ContentCard.module.scss";
 
 type ContentCardProps = {
 	children: ReactNode;
