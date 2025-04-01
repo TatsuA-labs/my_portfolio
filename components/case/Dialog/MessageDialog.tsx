@@ -1,6 +1,6 @@
 import Button from "@/components/base/Button/Button";
-import { useModalStore } from "@/stores/modalStore";
 import styles from "@/components/case/Dialog/MessageDialo.module.scss";
+import { useModalStore } from "@/stores/modalStore";
 
 type MessageDialogProps = {
 	title: string;
