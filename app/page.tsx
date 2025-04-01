@@ -1,7 +1,7 @@
-import Achievement from "app/_components/Achievement/Achievement";
-import HomeTitle from "app/_components/HomeTitle";
-import Award from "@/app/_components/Award/Award";
-import Skill from "@/app/_components/Skill/Skill";
+import Achievement from "app/_domain/Achievement/Achievement";
+import HomeTitle from "app/_domain/HomeTitle";
+import Award from "@/app/_domain/Award/Award";
+import Skill from "@/app/_domain/Skill/Skill";
 import styles from "@/app/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
 
@@ -45,17 +45,30 @@ export type LangSheet = {
 };
 
 const Page = async () => {
-	const [awards, achievements, frameworks, langs]: [
-		AwardSheet,
-		AchievementSheet,
-		FrameworkSheet,
-		LangSheet,
-	] = await Promise.all([
-		fetchSheetData(process.env.SHEET_AWARD),
-		fetchSheetData(process.env.SHEET_ACHIEVEMENT),
-		fetchSheetData(process.env.SHEET_SKILL_FW),
-		fetchSheetData(process.env.SHEET_SKILL_LANG),
-	]);
+	let awards: AwardSheet = { data: [] };
+	let achievements: AchievementSheet = { data: [] };
+	let frameworks: FrameworkSheet = { data: [] };
+	let langs: LangSheet = { data: [] };
+
+	try {
+		const [awardsData, achievementsData, frameworksData, langsData]: [
+			AwardSheet,
+			AchievementSheet,
+			FrameworkSheet,
+			LangSheet,
+		] = await Promise.all([
+			fetchSheetData(process.env.SHEET_AWARD),
+			fetchSheetData(process.env.SHEET_ACHIEVEMENT),
+			fetchSheetData(process.env.SHEET_SKILL_FW),
+			fetchSheetData(process.env.SHEET_SKILL_LANG),
+		]);
+		awards = awardsData;
+		achievements = achievementsData;
+		frameworks = frameworksData;
+		langs = langsData;
+	} catch (error) {
+		console.error("データの取得に失敗しました:", error);
+	}
 
 	return (
 		<div className={styles.page}>

@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
-import Header from "@/app/_components/Header";
+import Header from "@/app/_domain/Header";
 import styles from "@/app/layout.module.scss";
+import GlobalDialog from "@/components/base/Dialog/GlobalDialogWrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
 			>
 				<Header />
 				{children}
+				<GlobalDialog />
 			</body>
 		</html>
 	);

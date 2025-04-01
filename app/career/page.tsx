@@ -1,5 +1,5 @@
-import CareerContent from "@/app/career/_components/CareerContent";
-import SchoolContent from "@/app/career/_components/SchoolContent";
+import CareerContent from "@/app/career/_domain/CareerContent";
+import SchoolContent from "@/app/career/_domain/SchoolContent";
 import styles from "@/app/career/page.module.scss";
 import { fetchSheetData } from "@/lib/fetchSheetData";
 import { parseAdditional, parseProject } from "@/utils/parseSheetData";
@@ -27,10 +27,19 @@ export type SchoolSheet = {
 };
 
 const Page = async () => {
-	const [careers, schools]: [CareerSheet, SchoolSheet] = await Promise.all([
-		fetchSheetData(process.env.SHEET_CAREER),
-		fetchSheetData(process.env.SHEET_SCHOOL),
-	]);
+	let careers: CareerSheet = { data: [] };
+	let schools: SchoolSheet = { data: [] };
+
+	try {
+		const [careersData, schoolsData] = await Promise.all([
+			fetchSheetData(process.env.SHEET_CAREER),
+			fetchSheetData(process.env.SHEET_SCHOOL),
+		]);
+		careers = careersData;
+		schools = schoolsData;
+	} catch (error) {
+		console.error("データの取得に失敗しました:", error);
+	}
 
 	return (
 		<div className={styles.career}>
