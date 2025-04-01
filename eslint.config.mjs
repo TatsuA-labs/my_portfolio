@@ -12,6 +12,23 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+	{
+		ignores: [
+			".github/",
+			".next/",
+			".vscode/",
+			"node_modules/",
+			"public/",
+			".env",
+			".gitignore/",
+			"next-env.d.ts",
+			"next.config.ts",
+			"package-lock.json",
+			"package.json",
+			"README.md",
+			"TODO.txt",
+		],
+	},
 	...compat.config({
 		extends: ["next/core-web-vitals"],
 		plugins: ["import", "no-relative-import-paths", "unused-imports"],

@@ -1,7 +1,7 @@
 "use client";
+import ReactDOM from "react-dom";
 import styles from "@/components/base/Dialog/GlobalDialogWrapper.module.scss";
 import { useModalStore } from "@/stores/modalStore";
-import ReactDOM from "react-dom";
 
 const GlobalDialogWrapper = () => {
 	const { isOpen, content } = useModalStore();
