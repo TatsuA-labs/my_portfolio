@@ -5,7 +5,7 @@ import Spinner from "@/components/base/Spinner/Spinner";
 
 const OriginalSpinner = () => {
 	return (
-		<ContentCard created="2025-03-31" title="自作スピナー" height={300}>
+		<ContentCard created="2025-03-31" title="自作スピナー" height={200}>
 			<Spinner />
 		</ContentCard>
 	);

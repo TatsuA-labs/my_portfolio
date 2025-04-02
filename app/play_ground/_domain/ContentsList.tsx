@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Login from "@/app/play_ground/_domain/Auth/Login";
 import CountUp from "@/app/play_ground/_domain/CountUp/CountUp";
 import DamageEffect from "@/app/play_ground/_domain/DamageEffect/DamageEffect";
 import GlobalDialog from "@/app/play_ground/_domain/Dialog/GlobalDialog";
@@ -14,6 +15,7 @@ const ContentsList = () => {
 		{ id: 4, Component: WebCamera },
 		{ id: 5, Component: Spinner },
 		{ id: 6, Component: GlobalDialog },
+		{ id: 7, Component: Login },
 	];
 
 	return (
