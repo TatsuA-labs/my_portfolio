@@ -12,7 +12,7 @@ const Login = async () => {
 	const image = session?.user?.image ?? "";
 
 	return (
-		<ContentCard created="2025-02-26" title="数値の上昇の表現">
+		<ContentCard created="2025-04-02" title="NextAuthを使ったGithubログイン">
 			<div className={styles.login}>
 				<div className={styles.login_info}>
 					{session ? `${name}がログイン中` : "ログインしてください"}
