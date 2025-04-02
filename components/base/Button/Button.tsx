@@ -1,6 +1,6 @@
 import styles from "@/components/base/Button/Button.module.scss";
 
-type LinkButtonProps = {
+type ButtonProps = {
 	onClick?: () => void;
 	title: string;
 	type?: "button" | "submit" | "reset";
@@ -12,7 +12,7 @@ const Button = ({
 	title,
 	type = "button",
 	color = "primary",
-}: LinkButtonProps) => {
+}: ButtonProps) => {
 	return (
 		<button
 			type={type}
