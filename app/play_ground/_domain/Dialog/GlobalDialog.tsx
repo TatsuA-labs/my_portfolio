@@ -15,7 +15,7 @@ const GlobalDialog = () => {
 		<ContentCard
 			created="2025-03-31"
 			title="グローバル管理のダイアログ"
-			height={200}
+			height={100}
 		>
 			<div className={styles.global_dialog}>
 				<Button title="open" onClick={openDialog} />

@@ -23,11 +23,13 @@ const Page = () => {
 					created="2025-03-23"
 					title="本サイトを構成する技術"
 					isFlex={true}
-					height={400}
 				>
 					<div className={styles.content}>
 						<h3>フロントエンド</h3>
-						<p>フレームワーク: Next.js + Css Modules + Scss</p>
+						<p>フレームワーク:</p>
+						<p>Next.js</p>
+						<p>Css Modules + Scss</p>
+						<p>BCDデザイン</p>
 						<p>言語: Typescript</p>
 						<p>理由:</p>
 						<ul>
@@ -39,6 +41,10 @@ const Page = () => {
 								Css
 								Modulesは、CSSのスコープを持つことができるため、コンポーネントごとにCSSを管理することができる。
 								build時間が短い。
+							</li>
+							<li>
+								Atomicデザインをより簡略化したもの。
+								より直感的にわかりやすく、管理がしやすいため採用。
 							</li>
 						</ul>
 					</div>
@@ -61,8 +67,8 @@ const Page = () => {
 						<p>理由:</p>
 						<ul>
 							<li>
-								公開しているデータのため、Google
-								Spredsheetを使うことでDB代を削減できる。z
+								公開しているデータであれば、Google
+								Spredsheetを使うことでDB代を削減できる。
 							</li>
 						</ul>
 					</div>
