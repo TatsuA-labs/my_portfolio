@@ -1,0 +1,21 @@
+.product {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.info_wrapper {
+  display: flex;
+  gap: 10px;
+}
+.image {
+  border: 1px solid black;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

@@ -6,7 +6,7 @@ type ContentCardProps = {
 	created: string;
 	title: string;
 	isFlex?: boolean;
-	height?: number;
+	height?: number | "100%";
 };
 
 const ContentCard = ({
@@ -14,7 +14,7 @@ const ContentCard = ({
 	created,
 	title,
 	isFlex,
-	height = 200,
+	height = "100%",
 }: ContentCardProps) => {
 	return (
 		<div className={styles.content_wrapper}>

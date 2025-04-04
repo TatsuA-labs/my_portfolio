@@ -1,7 +1,7 @@
 import CareerContent from "@/app/career/_domain/CareerContent";
 import SchoolContent from "@/app/career/_domain/SchoolContent";
 import styles from "@/app/career/page.module.scss";
-import { fetchSheetData } from "@/lib/fetchSheetData";
+import { fetchSheetData } from "@/utils/fetchSheetData";
 import { parseAdditional, parseProject } from "@/utils/parseSheetData";
 
 export type CareerSheet = {

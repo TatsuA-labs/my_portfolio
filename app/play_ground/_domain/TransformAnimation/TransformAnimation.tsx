@@ -7,6 +7,7 @@ const TransformAnimation = () => {
 			created="2025-02-26"
 			title="要素をアニメーションで動かす"
 			isFlex={true}
+			height={200}
 		>
 			<div className={styles.square} />
 			<div className={styles.triangle} />
