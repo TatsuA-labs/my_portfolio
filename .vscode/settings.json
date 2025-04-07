@@ -2,6 +2,7 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"editor.codeActionsOnSave": {
 		"source.addMissingImports": "explicit",
+		"source.organizeImports": "explicit",
 		"source.fixAll.eslint": "explicit",
 		"source.fixAll.biome": "explicit",
 		"source.fixAll": "explicit"
@@ -16,6 +17,10 @@
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "biomejs.biome"
 	},
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"stylelint.validate": ["scss"]
+	"[scss]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"stylelint.validate": ["scss"],
+	"typescript.preferences.importModuleSpecifier": "non-relative"
 }
