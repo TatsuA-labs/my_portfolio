@@ -1,9 +1,9 @@
-import Achievement from "app/_domain/Achievement/Achievement";
-import HomeTitle from "app/_domain/HomeTitle";
 import Award from "@/app/_domain/Award/Award";
 import Skill from "@/app/_domain/Skill/Skill";
 import styles from "@/app/page.module.scss";
 import { fetchSheetData } from "@/utils/fetchSheetData";
+import Achievement from "app/_domain/Achievement/Achievement";
+import HomeTitle from "app/_domain/HomeTitle";
 
 export type AwardSheet = {
 	data: {
