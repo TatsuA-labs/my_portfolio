@@ -1,6 +1,6 @@
+import Image from "next/image";
 import styles from "@/app/_domain/Award/Award.module.scss";
 import type { AwardSheet } from "@/app/page";
-import Image from "next/image";
 
 type AwardProps = { awards: AwardSheet };
 const Award = ({ awards }: AwardProps) => {

@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 import { Suspense } from "react";
 import "@/app/globals.css";
 import Header from "@/app/_domain/Header";
 import styles from "@/app/layout.module.scss";
-import GlobalDialog from "@/components/base/Dialog/GlobalDialogWrapper";
 import Loading from "@/app/loading";
+import GlobalDialog from "@/components/base/Dialog/GlobalDialogWrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -35,9 +35,7 @@ export default function RootLayout({
 				className={`${styles.body} ${geistSans.variable} ${geistMono.variable}`}
 			>
 				<Header />
-				<Suspense fallback={<Loading />}>
-					{children}
-				</Suspense>
+				<Suspense fallback={<Loading />}>{children}</Suspense>
 				<GlobalDialog />
 			</body>
 		</html>

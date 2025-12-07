@@ -1,19 +1,10 @@
 "use client";
-import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/play_ground/_domain/WebCamera/WebCamera.module.scss";
 import Button from "@/components/base/Button/Button";
 import ContentCard from "@/components/base/Card/ContentCard";
 
 const WebCameraTest = () => {
-	const constraints = {
-		audio: false,
-		video: {
-			width: 1000,
-			height: 500,
-		},
-	};
-
 	const videoRef = useRef<HTMLVideoElement>(null);
 	//カメラとマイクのon/offボタンのstateを管理
 	const [cameraState, setCameraState] = useState(false);

@@ -6,7 +6,7 @@ import { useModalStore } from "@/stores/modalStore";
 const GlobalDialogWrapper = () => {
 	const { isOpen, content } = useModalStore();
 
-	if (!isOpen) return <></>;
+	if (!isOpen) return;
 
 	return ReactDOM.createPortal(
 		<div className={styles.global_dialog}>

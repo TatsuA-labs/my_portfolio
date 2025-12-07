@@ -1,7 +1,6 @@
 "use client";
-import type React from "react";
-import { useCallback, useEffect, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState, useTransition } from "react";
 import StripeProduct from "@/app/play_ground/_domain/Stripe/_domain/StripeProductProps";
 import styles from "@/app/play_ground/_domain/Stripe/StripeDemo.module.scss";
 import ContentCard from "@/components/base/Card/ContentCard";

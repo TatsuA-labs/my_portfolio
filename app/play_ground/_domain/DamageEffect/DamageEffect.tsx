@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import styles from "@/app/play_ground/_domain/DamageEffect/DamageEffect.module.scss";
 import Button from "@/components/base/Button/Button";
 import ContentCard from "@/components/base/Card/ContentCard";
