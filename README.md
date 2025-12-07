@@ -34,3 +34,20 @@ Google Spredsheet
 ### Infrasturacture
 Vercel
 ・楽なので...、そのうち乗り換える予定
+
+### Security
+safe-chain
+・サプライチェーン攻撃対策で下記のinstallを前提に運用しています。
+```
+npm install -g @aikidosec/safe-chain
+safe-chain setup
+
+# テスト用
+npm install safe-chain-test
+
+## 正常な出力
+✖ Safe-chain: Malicious changes detected:
+ - safe-chain-test@0.0.1-security
+
+Exiting without installing malicious packages.
+```
