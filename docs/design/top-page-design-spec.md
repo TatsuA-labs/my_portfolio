@@ -212,7 +212,6 @@
 | Skill | Organism | app/_components/_organisms/Skill/ |
 | Achievement | Organism | app/_components/_organisms/Achievement/ |
 | Award | Organism | app/_components/_organisms/Award/ |
-| Cta | Organism | app/_components/_organisms/Cta/ |
 | LinkButton | Base | components/base/Button/ |
 
 - Header と Footer は layout から参照するため、`app/_components/_organisms/` に配置するか、全ページ共通なら `components/` 配下に置くかは実装時に決定する。
