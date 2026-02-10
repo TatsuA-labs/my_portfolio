@@ -1,6 +1,5 @@
 import Achievement from "@/app/_components/_organisms/Achievement/Achievement";
 import Award from "@/app/_components/_organisms/Award/Award";
-import Cta from "@/app/_components/_organisms/Cta/Cta";
 import HomeTitle from "@/app/_components/_organisms/HomeTitle/HomeTitle";
 import Skill from "@/app/_components/_organisms/Skill/Skill";
 import styles from "@/app/page.module.scss";
@@ -81,7 +80,6 @@ const Page = async () => {
 				<div className={styles.section_wrapper}>
 					<Award awardsData={awardsData} />
 				</div>
-				<Cta />
 			</div>
 		</main>
 	);
