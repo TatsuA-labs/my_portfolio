@@ -1,6 +1,6 @@
 import styles from "@/app/play_ground/_domain/Auth/SignOut.module.scss";
 import { signOut } from "@/auth";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/atoms/Button/Button";
 
 const SignOut = () => {
 	return (

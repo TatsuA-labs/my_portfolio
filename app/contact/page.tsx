@@ -1,11 +1,12 @@
 import styles from "@/app/contact/page.module.scss";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/atoms/Button/Button";
+import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 
 const Page = () => {
 	return (
 		<div className={styles.page}>
+			<PageTitle title="コンタクト" />
 			<div className={styles.contact}>
-				<h2>コンタクト</h2>
 				<form className={styles.form}>
 					<div className={styles.input_container}>
 						<label htmlFor="name" className={styles.label}>

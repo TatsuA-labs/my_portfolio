@@ -1,7 +1,8 @@
-import CareerContent from "@/app/career/_domain/CareerContent";
-import SchoolContent from "@/app/career/_domain/SchoolContent";
+import CareerSection from "@/app/career/_components/_organisms/CareerSection/CareerSection";
+import SchoolSection from "@/app/career/_components/_organisms/SchoolSection/SchoolSection";
+import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 import styles from "@/app/career/page.module.scss";
-import { fetchSheetData } from "@/utils/fetchSheetData";
+import { fetchSheetData } from "@/lib/api/fetchSheetData";
 import { parseAdditional, parseProject } from "@/utils/parseSheetData";
 
 export type CareerSheet = {
@@ -41,40 +42,31 @@ const Page = async () => {
 		console.error("データの取得に失敗しました:", error);
 	}
 
+	// データを新しいコンポーネント用の形式に変換
+	const careersData = careers.data.map((career) => ({
+		id: career.id,
+		term: career.term,
+		name: career.name,
+		role: career.role,
+		linkUrl: career.linkUrl,
+		projects: parseProject(career.projects),
+		additionals: parseAdditional(career.additionals),
+	}));
+
+	const schoolsData = schools.data.map((school) => ({
+		id: school.id,
+		term: school.term,
+		name: school.name,
+		linkUrl: school.linkUrl,
+		additionals: parseAdditional(school.additionals),
+	}));
+
 	return (
-		<div className={styles.career}>
-			<h1>職歴・学歴</h1>
-			<div className={styles.title_wapper}>
-				<h2>職歴</h2>
-				<hr className={styles.hr} />
-			</div>
-			{careers.data?.map((career) => {
-				return (
-					<CareerContent
-						key={career.id}
-						term={career.term}
-						name={career.name}
-						role={career.role}
-						linkUrl={career.linkUrl}
-						additionals={parseAdditional(career.additionals)}
-						projects={parseProject(career.projects)}
-					/>
-				);
-			})}
-			<div className={styles.title_wapper}>
-				<h2>学歴</h2>
-				<hr className={styles.hr} />
-			</div>
-			{schools.data?.map((school) => (
-				<SchoolContent
-					key={school.id}
-					name={school.name}
-					term={school.term}
-					linkUrl={school.linkUrl}
-					additionals={parseAdditional(school.additionals)}
-				/>
-			))}
-		</div>
+		<main className={styles.page}>
+			<PageTitle title="キャリア" />
+			<CareerSection careers={careersData} />
+			<SchoolSection schools={schoolsData} />
+		</main>
 	);
 };
 

@@ -1,0 +1,19 @@
+.title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 16px;
+	color: var(--foreground);
+}
+
+.description {
+	font-size: 1rem;
+	color: var(--foreground);
+	margin-bottom: 24px;
+	line-height: 1.6;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 24px;
+}

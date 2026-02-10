@@ -1,0 +1,480 @@
+---
+description: プロジェクト全体の技術スタックと規約
+alwaysApply: true
+---
+
+# プロジェクト規約
+
+## 技術スタック
+
+- **FW**: Next.js 15（App Router）, React 19, TypeScript
+- **スタイル**: CSS Modules + SCSS
+- **設計**: Atomic デザイン（atoms / molecules / organisms / templates / pages）
+- **Lint/Format**: Biome
+- **状態管理**: Zustand
+- **UIコンポーネント**: Radix UI（`@radix-ui/react-*`）を優先使用。必要に応じて Headless UI（`@headlessui/react`）も使用可能
+- **アイコン**: React Icons（`react-icons`）
+- **データ**: 現状は Google Spreadsheet（`lib/api/fetchSheetData.ts`）。将来 DB 連携を想定。
+
+## プロジェクト概要
+
+- **種別**: エンジニアのポートフォリオサイト
+- **遊び場（play_ground）**: これまで開発した機能のアウトプットを掲載するページ。`/play_ground` 以下に実装。
+- **将来方針**: DB を使った機能の追加を予定している。
+
+## 主要ページ
+
+- `/` - トップページ
+- `/career` - キャリア（経歴）ページ
+- `/about_site` - サイトについて（技術選定・構成の説明）
+- `/contact` - お問い合わせページ
+- `/play_ground` - 遊び場（開発した機能のアウトプット一覧）
+
+## ディレクトリ構成
+
+- `app/` - ページ（Pages）と Next.js App Router のルーティング
+- `app/**/page.tsx` - 各ページのエントリーポイント
+- `app/**/_components/` - そのページ専用のコンポーネント（`page.tsx` と同じ階層）
+  - `app/**/_components/_organisms/` - ページ専用の Organisms
+  - `app/**/_components/_templates/` - ページ専用の Templates
+- `components/atoms/` - 最小単位のコンポーネント（Atomic の Atoms）
+- `components/molecules/` - 汎用的なコンポーネント（Atomic の Molecules）
+- `lib/`, `hooks/`, `stores/` - API・フック・ストア
+- `docs/design/` - デザインの最終稿のみを格納。各ページの**構造化デザイン仕様（.md）**と**プレビュー用HTML（.html）**を置く。デザイン承認後は旧版・ドラフトを削除し、最終稿だけ残す（development-workflow の「デザイン確定後の docs/design の扱い」に従う）。
+- `docs/tmp/` - 検討中・作業中の資料を格納。要件メモ、詳細設計のドラフト、承認前のデザイン案（仕様書・プレビュー）など。確定したものは適切な場所（例: docs/design）に最終稿を移し、不要になった tmp 内のファイルは削除する。
+
+## コーディング規約
+
+- TypeScript を厳格に使用
+- Biome のルールに従う（`biome.json` 参照）
+- CSS Modules + SCSS を使用（`.module.scss`）
+- 関数コンポーネントを使用
+- カスタムフックでロジックを分離
+
+## アイコンライブラリ
+
+- **React Icons（`react-icons`）の Heroicons（`react-icons/hi`）を基本として使用する**
+- SVGファイルを直接使用するのではなく、React Icons のコンポーネントを使用する
+- **統一感を保つため、基本的に Heroicons のみを使用する**
+- Heroicons で対応できない場合のみ、他のアイコンセット（`react-icons/fa`, `react-icons/md` など）の使用を検討する
+
+```typescript
+// ✅ GOOD - Heroicons を基本として使用
+import { HiExternalLink, HiMail, HiGithub, HiTwitter } from "react-icons/hi";
+
+const LinkWithIcon = ({ href }: LinkWithIconProps) => {
+    return (
+        <Link href={href} target="_blank" rel="noopener">
+            <HiExternalLink />
+        </Link>
+    );
+};
+
+// ✅ GOOD - Heroicons で対応できない場合のみ他のセットを使用
+import { FaDiscord } from "react-icons/fa"; // Heroicons にない場合のみ
+
+// ❌ BAD (SVGファイルを直接使用)
+import Image from "next/image";
+<Image src="/link_icon.svg" alt="link icon" width={16} height={16} />
+
+// ❌ BAD (統一感のない複数のアイコンセットの混在)
+import { FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { HiTwitter } from "react-icons/hi";
+```
+
+**Heroicons を推奨する理由**:
+- シンプルでモダンなデザイン（統一感がある）
+- 軽量（パフォーマンスに優れる）
+- ポートフォリオサイトに適したスタイル
+- **Tailwind CSS は不要**。React Icons 経由で使用する場合、通常のReactコンポーネントとして動作し、CSS Modules + SCSS でも問題なくスタイリング可能
+
+**スタイリング方法**:
+```typescript
+// ✅ GOOD - CSS Modules + SCSS でスタイリング
+import { HiExternalLink } from "react-icons/hi";
+import styles from "./LinkWithIcon.module.scss";
+
+const LinkWithIcon = ({ href }: LinkWithIconProps) => {
+    return (
+        <Link href={href} className={styles.link}>
+            <HiExternalLink className={styles.icon} />
+        </Link>
+    );
+};
+```
+
+```scss
+// LinkWithIcon.module.scss
+.icon {
+    width: 16px;
+    height: 16px;
+    color: #333;
+    
+    &:hover {
+        color: #007bff;
+    }
+}
+```
+
+**利用可能なアイコンセット（例外的に使用可能）**:
+- `react-icons/fa` - Font Awesome（Heroicons にないアイコンのみ）
+- `react-icons/md` - Material Design icons（Heroicons にないアイコンのみ）
+- `react-icons/fi` - Feather Icons（Heroicons にないアイコンのみ）
+- その他（[React Icons公式サイト](https://react-icons.github.io/react-icons/) を参照）
+
+**重要**: 
+- **基本的に `react-icons/hi`（Heroicons）のみを使用し、統一感を保つ**
+- Heroicons で対応できない場合のみ、他のアイコンセットの使用を検討する
+- 複数のアイコンセットを混在させない（統一感が損なわれる）
+
+**インストールが必要な場合**:
+```bash
+npm install react-icons
+```
+
+## UIコンポーネントライブラリ
+
+- **Radix UI（`@radix-ui/react-*`）を優先使用する**
+- 必要に応じて Headless UI（`@headlessui/react`）も使用可能
+- カスタム実装よりも、これらのライブラリを使用してアクセシビリティを確保する
+
+### Radix UI
+
+**推奨理由**:
+- 豊富なコンポーネントセット（Dialog、Dropdown Menu、Select、Tabs、Popover、Tooltip、Accordion など）
+- Next.js 15 App Router の Server Components に対応
+- 高いアクセシビリティ（ARIA属性、キーボード操作、フォーカス管理が組み込まれている）
+- Tree-shaking 対応（必要なコンポーネントのみインポート）
+
+**使用例**:
+```typescript
+// ✅ GOOD - Radix UI Dialog
+import * as Dialog from "@radix-ui/react-dialog";
+
+const MyDialog = ({ isOpen, onClose }: DialogProps) => {
+    return (
+        <Dialog.Root open={isOpen} onOpenChange={onClose}>
+            <Dialog.Portal>
+                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Content className={styles.content}>
+                    <Dialog.Title>タイトル</Dialog.Title>
+                    <Dialog.Description>説明文</Dialog.Description>
+                    <Dialog.Close>閉じる</Dialog.Close>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    );
+};
+
+// ✅ GOOD - Radix UI Dropdown Menu
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+const MyDropdown = () => {
+    return (
+        <DropdownMenu.Root>
+            <DropdownMenu.Trigger>メニュー</DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+                <DropdownMenu.Content>
+                    <DropdownMenu.Item>項目1</DropdownMenu.Item>
+                    <DropdownMenu.Item>項目2</DropdownMenu.Item>
+                </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+        </DropdownMenu.Root>
+    );
+};
+```
+
+**利用可能なコンポーネント**:
+- Radix UI のすべてのコンポーネントを利用可能（制限なし）
+- よく使うコンポーネント: Dialog、Dropdown Menu、Select、Tabs、Popover、Tooltip、Accordion、Checkbox、Radio Group、Switch など
+- 必要に応じて [Radix UI公式サイト](https://www.radix-ui.com/primitives/docs/overview/introduction) から適切なコンポーネントを選択して使用する
+
+**メリットを最大限活用し、デメリットを最小限に抑える実装方法**:
+
+### 1. Tree-shaking を活用したバンドルサイズ最適化
+
+**実装方法**:
+- 必要なコンポーネントのみ個別にインストール・インポートする
+- 各コンポーネントは個別パッケージとして提供されているため、使用するもののみインストール可能
+
+```bash
+# ✅ GOOD - 必要なコンポーネントのみインストール
+npm install @radix-ui/react-dialog
+npm install @radix-ui/react-dropdown-menu
+
+# ❌ BAD - すべてのコンポーネントをインストール（不要）
+# npm install @radix-ui/react-* （このようなパッケージは存在しない）
+```
+
+```typescript
+// ✅ GOOD - 必要なコンポーネントのみインポート
+import * as Dialog from "@radix-ui/react-dialog";
+
+// ❌ BAD - すべてのコンポーネントをインポート（不可能だが、例として）
+// import * from "@radix-ui/react-*"; （このようなインポートは存在しない）
+```
+
+### 2. 使用タイミングの判断基準
+
+**Radix UI を使用すべき場合**:
+- ダイアログ、ドロップダウン、メニュー、セレクトボックスなど、複雑なインタラクションが必要な場合
+- アクセシビリティ（ARIA属性、キーボード操作、フォーカス管理）が重要な場合
+- カスタム実装で同等の機能を実現するのに時間がかかる場合
+
+**カスタム実装を検討すべき場合**:
+- シンプルなボタン、リンク、テキスト表示など、基本的なUI要素
+- プロジェクト固有のデザイン要件が強く、Radix UI のスタイリングを大幅に変更する必要がある場合
+
+**判断フロー**:
+1. 必要な機能を確認（ダイアログ、メニュー、セレクトなど）
+2. Radix UI に該当するコンポーネントがあるか確認
+3. ある場合 → Radix UI を使用（アクセシビリティと開発速度のメリット）
+4. ない場合 → カスタム実装を検討
+
+### 3. Atomic デザインとの統合
+
+**実装方法**:
+- Radix UI コンポーネントは Atomic デザインの各層で使用可能
+- **Atoms**: Radix UI の基本コンポーネント（Checkbox、Radio、Switch など）をラップ
+- **Molecules**: Radix UI の複合コンポーネント（Dialog、Dropdown Menu など）をラップ
+- **Organisms**: Radix UI を組み合わせた複雑なコンポーネント
+
+```typescript
+// ✅ GOOD - Molecules 層での Radix UI 使用例
+// components/molecules/Dialog/Dialog.tsx
+import * as Dialog from "@radix-ui/react-dialog";
+import styles from "./Dialog.module.scss";
+
+type DialogProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    children: React.ReactNode;
+};
+
+const CustomDialog = ({ isOpen, onClose, title, children }: DialogProps) => {
+    return (
+        <Dialog.Root open={isOpen} onOpenChange={onClose}>
+            <Dialog.Portal>
+                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Content className={styles.content}>
+                    <Dialog.Title className={styles.title}>{title}</Dialog.Title>
+                    {children}
+                    <Dialog.Close className={styles.close}>閉じる</Dialog.Close>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    );
+};
+```
+
+### 4. パフォーマンス最適化
+
+**実装方法**:
+- 必要なコンポーネントのみインストール（Tree-shaking）
+- 動的インポートを検討（大きなコンポーネントの場合）
+- CSS Modules + SCSS でスタイリング（バンドルサイズを最小化）
+
+```typescript
+// ✅ GOOD - 動的インポート（大きなコンポーネントの場合）
+import { lazy, Suspense } from "react";
+
+const Dialog = lazy(() => import("@/components/molecules/Dialog/Dialog"));
+
+const MyPage = () => {
+    return (
+        <Suspense fallback={<div>読み込み中...</div>}>
+            <Dialog isOpen={isOpen} onClose={onClose} title="タイトル">
+                コンテンツ
+            </Dialog>
+        </Suspense>
+    );
+};
+```
+
+### 5. スタイリングのベストプラクティス
+
+**実装方法**:
+- CSS Modules + SCSS でスタイリング（プロジェクトのスタイルシステムと統合）
+- Radix UI のクラス名を活用してスタイリング
+
+```typescript
+// ✅ GOOD - CSS Modules + SCSS でスタイリング
+import * as Dialog from "@radix-ui/react-dialog";
+import styles from "./Dialog.module.scss";
+
+<Dialog.Content className={styles.dialog_content}>
+    <Dialog.Title className={styles.dialog_title}>タイトル</Dialog.Title>
+</Dialog.Content>
+```
+
+```scss
+// Dialog.module.scss
+.dialog_content {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 500px;
+}
+
+.dialog_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+```
+
+**インストール方法（必要なコンポーネントのみ）**:
+```bash
+# よく使うコンポーネント
+npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-select
+
+# 必要に応じて追加
+npm install @radix-ui/react-tabs @radix-ui/react-popover @radix-ui/react-tooltip
+```
+
+**インストール方法**:
+```bash
+# 必要なコンポーネントのみインストール（推奨）
+npm install @radix-ui/react-dialog
+npm install @radix-ui/react-dropdown-menu
+
+# または、よく使うコンポーネントをまとめてインストール
+npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-select @radix-ui/react-tabs
+```
+
+### Headless UI
+
+**使用する場合**:
+- シンプルなコンポーネントが必要な場合
+- Radix UI にないコンポーネントが必要な場合
+
+**使用例**:
+```typescript
+// ✅ GOOD - Headless UI Dialog（Radix UIで対応できない場合のみ）
+import { Dialog } from "@headlessui/react";
+
+const MyDialog = ({ isOpen, onClose }: DialogProps) => {
+    return (
+        <Dialog open={isOpen} onClose={onClose}>
+            <Dialog.Panel>
+                <Dialog.Title>タイトル</Dialog.Title>
+                <Dialog.Description>説明文</Dialog.Description>
+            </Dialog.Panel>
+        </Dialog>
+    );
+};
+```
+
+**インストール方法**:
+```bash
+npm install @headlessui/react
+```
+
+### カスタム実装との比較
+
+```typescript
+// ❌ BAD - カスタム実装（アクセシビリティが不十分）
+const CustomDialog = ({ isOpen, onClose }: DialogProps) => {
+    if (!isOpen) return null;
+    return ReactDOM.createPortal(
+        <div onClick={onClose}>
+            <div>{content}</div>
+        </div>,
+        document.body
+    );
+};
+
+// ✅ GOOD - Radix UI（アクセシビリティが組み込まれている）
+import * as Dialog from "@radix-ui/react-dialog";
+```
+
+**重要**: 
+- ダイアログ、ドロップダウン、メニューなどの複雑なUIコンポーネントは、カスタム実装ではなく Radix UI または Headless UI を使用する
+- アクセシビリティ（ARIA属性、キーボード操作、フォーカス管理）が自動的に実装される
+- ポートフォリオサイトとして、アクセシビリティの高い実装は重要な評価ポイント
+
+## デザイン原則
+
+### 統一感
+
+- **サイト全体の統一感を最優先**。新しいデザインを追加する際は、既存のページ（`/`, `/career`, `/play_ground` など）のデザインと整合性を保つ。
+- 既存のCSS変数（`app/globals.css`）や既存コンポーネントのスタイルを参照し、一貫性を保つ。
+- 新しいデザイン要素を追加する場合は、既存のデザインシステムに統合できるか検討する。
+
+### 情報の見やすさ
+
+- **情報の見やすさを重視**。コンテンツの階層構造、コントラスト、フォントサイズ、行間、余白を適切に設定し、情報が読みやすく理解しやすいデザインにする。
+- 重要な情報は視覚的に強調する（サイズ、色、配置など）。
+- テキストの可読性を確保（適切なコントラスト比、行間、段落間の余白）。
+
+### ポートフォリオサイトとして重視すべき視点
+
+- **レスポンシブデザイン**: モバイル・タブレット・デスクトップで適切に表示されるよう、ブレークポイントを考慮
+- **アクセシビリティ**: WCAG準拠（コントラスト比、キーボード操作、スクリーンリーダー対応、適切なalt属性など）
+- **パフォーマンス**: 読み込み速度を考慮（画像最適化、不要なアニメーションの削減、コード分割）
+- **SEO**: 適切な見出し構造（h1-h6）、メタタグ、セマンティックHTML
+- **ユーザビリティ**: ナビゲーションの明確さ、CTAの明確さ、操作の直感性
+
+## 画像仕様
+
+デザイン・実装時に必要な画像の仕様をまとめます。AIは実装完了後、ユーザーに画像の用意を依頼する際に以下の仕様を参照してください。
+
+### ヒーロー用プロフィール写真（top_image.jpg）
+
+| 項目 | 推奨 |
+|------|------|
+| **用途** | トップページヒーローで円形表示（表示サイズ 240×240px） |
+| **アスペクト比** | **1:1（正方形）** が最適。円形トリミングで左右が切れないため。 |
+| **解像度** | **480×480px 以上**（2x 対応なら 720×720px 推奨） |
+| **構図** | 顔が中央付近に来るように。肩上がりまたは胸上がりが使いやすい。 |
+| **形式** | JPG または WebP。ファイルサイズは 200KB 以下を目安に圧縮可。 |
+
+**注意**: 横長や縦長の場合、円形で切れたときに顔が端に寄っていると見づらくなります。可能であれば **正方形にクロップした画像** を用意するか、顔が中央に来るようにトリミングしたバージョンを用意すると表示が安定します。
+
+### 開発実績カード用画像（メイン実績・サブ実績）
+
+**重要**: **画像は任意（オプショナル）**です。画像がない場合でも、テキストのみで十分に読みやすく表示されるデザインになっています。
+
+| 項目 | 推奨 |
+|------|------|
+| **用途** | メイン実績のみ、任意で追加可能。サブ実績は画像なしを前提。 |
+| **アスペクト比** | **16:10** または **4:3**（横長）。 |
+| **解像度** | **640×400px（16:10）** または **600×450px（4:3）** 以上。2x なら 1280×800px 程度。 |
+| **内容** | プロジェクトのスクリーンショット、サービス画面、ロゴ＋キービジュアルなど。 |
+| **形式** | JPG または WebP。 |
+
+**フリー画像の利用について**:
+- 画像を用意する場合、**Unsplash**（https://unsplash.com）や **Pexels**（https://www.pexels.com）などのフリー画像サイトから、ポートフォリオ・開発・テクノロジー関連の画像を探すことができます。
+- **利用前に必ずライセンスを確認**してください:
+  - Unsplash: Unsplash License（商用利用可、クレジット表記推奨）
+  - Pexels: Pexels License（商用利用可、クレジット表記不要）
+- 各サイトの利用規約を確認し、ポートフォリオサイトでの使用が許可されているか確認してください。
+- 可能であれば、実際のプロジェクトのスクリーンショットやロゴを使用する方が説得力が高まります。
+
+### 受賞歴用画像（award.jpg）
+
+| 項目 | 推奨 |
+|------|------|
+| **用途** | 受賞歴ブロックの右側（またはモバイルでは上部）に表示。 |
+| **アスペクト比** | **4:3**（横長）がレイアウトと相性がよい。 |
+| **解像度** | **600×450px 以上**（2x なら 1200×900px 程度）。 |
+| **内容** | 賞状・トロフィー・表彰式の写真など。 |
+| **形式** | JPG または WebP。 |
+
+横長（例: 16:9）の画像でも、4:3 で中央をトリミングして表示する想定です。
+
+### 画像依頼時のチェックリスト
+
+実装完了後、ユーザーに画像の用意を依頼する際は、以下のチェックリストを参照してください:
+
+- [ ] **top_image.jpg**: 正方形（1:1）、480px 以上、顔が中央付近
+- [ ] **開発実績メイン画像**: **任意**。ある場合: 16:10 または 4:3、640×400px 以上（プロジェクト画像またはフリー画像。利用規約要確認）
+- [ ] **開発実績サブ画像**: **不要**（画像なしを前提）
+- [ ] **受賞歴画像（award.jpg）**: 4:3、600×450px 以上
+
+## セキュリティ
+
+- サプライチェーン対策として safe-chain の利用を想定
+- 脆弱性診断として Shannon の利用を想定

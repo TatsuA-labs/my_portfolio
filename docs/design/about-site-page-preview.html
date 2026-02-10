@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>このサイトについて - プレビュー</title>
+	<style>
+		:root {
+			--background: #ffffff;
+			--foreground: #171717;
+			--muted: #6b7280;
+			--accent: #2563eb;
+			--section-bg: #f8fafc;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--background: #0a0a0a;
+				--foreground: #ededed;
+				--muted: #9ca3af;
+				--accent: #60a5fa;
+				--section-bg: #111827;
+			}
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			color: var(--foreground);
+			background: var(--background);
+			line-height: 1.7;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		.page {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0;
+		}
+
+		.page_title {
+			width: 100%;
+			padding: 64px 16px 48px;
+			text-align: center;
+		}
+
+		.page_title h1 {
+			font-size: 1.75rem;
+			font-weight: 700;
+			line-height: 1.25;
+			margin-bottom: 16px;
+		}
+
+		.page_title_lead {
+			font-size: 1rem;
+			color: var(--muted);
+			line-height: 1.7;
+			max-width: 65ch;
+			margin: 0 auto 16px;
+		}
+
+		.page_title_hr {
+			width: 100%;
+			max-width: 1100px;
+			margin: 0 auto;
+			height: 1px;
+			border: none;
+			background: var(--muted);
+			opacity: 0.5;
+		}
+
+		.section {
+			width: 100%;
+			padding: 64px 16px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.section_alt {
+			background: var(--section-bg);
+		}
+
+		.section_inner {
+			width: 100%;
+			max-width: 1100px;
+		}
+
+		.section h2 {
+			font-size: 1.5rem;
+			font-weight: 700;
+			line-height: 1.3;
+			margin-bottom: 24px;
+		}
+
+		.section h3 {
+			font-size: 1.25rem;
+			font-weight: 600;
+			line-height: 1.4;
+			margin-bottom: 16px;
+		}
+
+		.card {
+			background: var(--background);
+			border: 1px solid var(--muted);
+			border-radius: 8px;
+			padding: 24px;
+			margin-bottom: 24px;
+			opacity: 0.3;
+		}
+
+		.card h3 {
+			margin-top: 0;
+		}
+
+		.card p {
+			font-size: 1rem;
+			line-height: 1.7;
+			margin-bottom: 16px;
+			max-width: 65ch;
+		}
+
+		.card p:last-child {
+			margin-bottom: 0;
+		}
+
+		.tech_category {
+			background: var(--background);
+			border: 1px solid var(--muted);
+			border-radius: 8px;
+			padding: 24px;
+			margin-bottom: 24px;
+			opacity: 0.3;
+		}
+
+		.tech_category h3 {
+			margin-top: 0;
+		}
+
+		.tech_item {
+			margin-bottom: 16px;
+		}
+
+		.tech_item:last-child {
+			margin-bottom: 0;
+		}
+
+		.tech_name {
+			font-weight: 600;
+			font-size: 1rem;
+			margin-bottom: 4px;
+		}
+
+		.tech_description {
+			font-size: 0.875rem;
+			color: var(--muted);
+			margin-bottom: 8px;
+		}
+
+		.tech_reasons {
+			font-size: 0.875rem;
+			color: var(--muted);
+			line-height: 1.6;
+			padding-left: 24px;
+		}
+
+		.tech_reasons li {
+			margin-bottom: 4px;
+		}
+
+		.workflow_step {
+			background: var(--background);
+			border: 1px solid var(--muted);
+			border-radius: 8px;
+			padding: 24px;
+			margin-bottom: 24px;
+			opacity: 0.3;
+			display: flex;
+			gap: 16px;
+		}
+
+		.step_number {
+			background: var(--accent);
+			color: white;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 700;
+			flex-shrink: 0;
+		}
+
+		.step_content {
+			flex: 1;
+		}
+
+		.step_content h3 {
+			margin-top: 0;
+		}
+
+		.step_content p {
+			font-size: 1rem;
+			line-height: 1.7;
+			margin-bottom: 8px;
+		}
+
+		.step_details {
+			font-size: 0.875rem;
+			color: var(--muted);
+			line-height: 1.6;
+			padding-left: 24px;
+			margin-top: 8px;
+		}
+
+		.step_details li {
+			margin-bottom: 4px;
+		}
+
+		.overview {
+			font-size: 1rem;
+			line-height: 1.7;
+			max-width: 65ch;
+			margin-bottom: 32px;
+		}
+
+		@media (max-width: 767px) {
+			.page_title {
+				padding: 48px 16px 32px;
+			}
+
+			.page_title h1 {
+				font-size: 1.5rem;
+			}
+
+			.section {
+				padding: 48px 16px;
+			}
+
+			.workflow_step {
+				flex-direction: column;
+			}
+
+			.step_number {
+				align-self: flex-start;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<!-- ページタイトル -->
+		<div class="page_title">
+			<h1>このサイトについて</h1>
+			<p class="page_title_lead">このポートフォリオサイトの技術選定と開発手法について紹介します。</p>
+		</div>
+		<hr class="page_title_hr">
+
+		<!-- サイトの目的 -->
+		<section class="section">
+			<div class="section_inner">
+				<h2>サイトの目的</h2>
+				<div class="card">
+					<h3>ポートフォリオサイトとしての役割</h3>
+					<p>自分に興味を持っていただいた皆様に対して、アピールする場としての役割と、自分自身の過去を見直す役割を期待して作成しています。</p>
+				</div>
+				<div class="card">
+					<h3>技術的な興味を満たす場としての役割</h3>
+					<p>ポートフォリオの改修や、遊び場の追加を通して、自身の技術的なインプットとアウトプットとしても役割を期待しています。また、極力ライブラリを使わずに実装することを目指しています。</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 技術スタック -->
+		<section class="section section_alt">
+			<div class="section_inner">
+				<h2>本サイトを構成する技術</h2>
+				
+				<div class="tech_category">
+					<h3>フロントエンド</h3>
+					<div class="tech_item">
+						<div class="tech_name">Next.js 15</div>
+						<div class="tech_description">フレームワーク</div>
+						<ul class="tech_reasons">
+							<li>SSRやSSGが可能であるため、SEOに有利である。</li>
+							<li>Reactに比べて、初期実装までが楽である。</li>
+						</ul>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">CSS Modules + SCSS</div>
+						<div class="tech_description">スタイリング</div>
+						<ul class="tech_reasons">
+							<li>CSS Modulesは、CSSのスコープを持つことができるため、コンポーネントごとにCSSを管理することができる。</li>
+							<li>build時間が短い。</li>
+						</ul>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">Atomic Design</div>
+						<div class="tech_description">設計手法</div>
+						<ul class="tech_reasons">
+							<li>Atomicデザインをより簡略化したもの。より直感的にわかりやすく、管理がしやすいため採用。</li>
+						</ul>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">TypeScript</div>
+						<div class="tech_description">言語</div>
+					</div>
+				</div>
+
+				<div class="tech_category">
+					<h3>バックエンド</h3>
+					<div class="tech_item">
+						<div class="tech_name">Next.js 15</div>
+						<div class="tech_description">フレームワーク</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">TypeScript</div>
+						<div class="tech_description">言語</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">Go（予定）</div>
+						<div class="tech_description">言語</div>
+						<ul class="tech_reasons">
+							<li>フルスタック TypeScriptにすることで、単一の言語で実装ができる。処理速度が気になる場合は、Goを一部使っていきたい。（予定）</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="tech_category">
+					<h3>DB</h3>
+					<div class="tech_item">
+						<div class="tech_name">Google Spreadsheet</div>
+						<ul class="tech_reasons">
+							<li>公開しているデータであれば、Google Spreadsheetを使うことでDB代を削減できる。</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="tech_category">
+					<h3>インフラ</h3>
+					<div class="tech_item">
+						<div class="tech_name">Vercel</div>
+						<ul class="tech_reasons">
+							<li>Next.jsデプロイが簡単で、無料で使える。</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="tech_category">
+					<h3>その他</h3>
+					<div class="tech_item">
+						<div class="tech_name">Biome</div>
+						<div class="tech_description">Lint/Format</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">Zustand</div>
+						<div class="tech_description">状態管理</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">Radix UI / Headless UI</div>
+						<div class="tech_description">UIコンポーネント</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">React Icons（Heroicons）</div>
+						<div class="tech_description">アイコン</div>
+					</div>
+					<div class="tech_item">
+						<div class="tech_name">safe-chain / Shannon</div>
+						<div class="tech_description">セキュリティ</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- AI開発について -->
+		<section class="section">
+			<div class="section_inner">
+				<h2>AI開発について</h2>
+				<p class="overview">このサイトはAI開発ツール（Cursor）を活用して開発しています。AI開発により、要件の整理から設計、デザイン、実装、レビュー、PR作成まで、一貫したワークフローで高品質な開発を実現しています。</p>
+
+				<div class="workflow_step">
+					<div class="step_number">1</div>
+					<div class="step_content">
+						<h3>要件の具体化</h3>
+						<p>依頼内容を整理し、スコープ・優先度・制約を明確にする。</p>
+						<ul class="step_details">
+							<li>成果物: 要件の整理と確認事項のリスト</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="workflow_step">
+					<div class="step_number">2</div>
+					<div class="step_content">
+						<h3>詳細設計</h3>
+						<p>要件に基づき、データ構造・API・コンポーネント構成・ルーティングなどを設計する。</p>
+						<ul class="step_details">
+							<li>データ構造の定義</li>
+							<li>API 設計</li>
+							<li>コンポーネント構成図（Atomic デザインの階層を明記）</li>
+							<li>ルーティング設計</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="workflow_step">
+					<div class="step_number">3</div>
+					<div class="step_content">
+						<h3>デザイン</h3>
+						<p>詳細設計に基づき、視覚的なデザインを生成する。</p>
+						<ul class="step_details">
+							<li>構造化デザイン仕様（Markdown表形式）</li>
+							<li>簡易HTML/CSSコード（プレビュー用）</li>
+							<li>Atomic デザイン階層の明記</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="workflow_step">
+					<div class="step_number">4</div>
+					<div class="step_content">
+						<h3>開発</h3>
+						<p>承認されたデザインと詳細設計に従って実装する。</p>
+						<ul class="step_details">
+							<li>Atomic デザインの階層構造を厳守</li>
+							<li>各コンポーネントを正しいディレクトリに配置</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="workflow_step">
+					<div class="step_number">5</div>
+					<div class="step_content">
+						<h3>レビュー・セキュリティチェック</h3>
+						<p>実装の品質確認に加え、セキュリティチェックを行う。</p>
+						<ul class="step_details">
+							<li>コードレビュー</li>
+							<li>セキュリティチェック</li>
+							<li>Shannon（生成AIによる自動脆弱性診断ツール）の実行</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="workflow_step">
+					<div class="step_number">6</div>
+					<div class="step_content">
+						<h3>PR 作成</h3>
+						<p>変更をブランチにまとめ、PR を作成する。</p>
+						<ul class="step_details">
+							<li>Pull Request の作成</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+---
+description: CSS Modules + SCSS のスタイリング規約
+globs: "**/*.module.scss,**/*.scss"
+alwaysApply: false
+---
+
+# スタイリング規約
+
+このプロジェクトは CSS Modules + SCSS を使用しています。
+
+## CSS Modules
+
+### ファイル命名
+
+- コンポーネントと同じ名前の `.module.scss` ファイルを作成
+- コンポーネントと同じディレクトリに配置
+
+```
+Button/
+  Button.tsx
+  Button.module.scss
+```
+
+### インポート
+
+- `styles` という名前でインポート
+
+```typescript
+// ✅ GOOD
+import styles from "@/components/atoms/Button/Button.module.scss";
+```
+
+### クラス名の使用
+
+- `styles.className` の形式で使用（`snake_case`）
+- 動的なクラス名はテンプレートリテラルを使用
+
+```typescript
+// ✅ GOOD
+<button className={`${styles.button} ${styles[color]}`}>
+    {title}
+</button>
+
+<div className={styles.count_up_wrapper}>
+    <div className={styles.button_wrapper}>
+        {/* ... */}
+    </div>
+</div>
+
+// ❌ BAD (camelCase は使用しない)
+<div className={styles.countUpWrapper}>
+    <div className={styles.buttonWrapper}>
+        {/* ... */}
+    </div>
+</div>
+```
+
+### クラス名の命名
+
+- **`snake_case` を使用**（プロジェクト全体で統一）
+- 既存のコードベースは全て `snake_case` を使用している
+- JavaScript/TypeScript の変数名（`camelCase`）と明確に区別できる
+
+```scss
+// ✅ GOOD
+.count_up_wrapper {
+    // ...
+}
+
+.button_wrapper {
+    // ...
+}
+
+.title_wapper {
+    // ...
+}
+
+.image_wrapper {
+    // ...
+}
+
+.content_wrapper {
+    // ...
+}
+
+// ❌ BAD (camelCase は使用しない)
+.countUpWrapper {
+    // ...
+}
+
+.buttonWrapper {
+    // ...
+}
+```
+
+## SCSS
+
+### ネスト
+
+- 適切なレベルでネスト（3レベルまで推奨）
+
+```scss
+// ✅ GOOD
+.button {
+    padding: 12px 24px;
+    
+    &.primary {
+        background-color: #007bff;
+    }
+    
+    &:hover {
+        opacity: 0.8;
+    }
+}
+```
+
+### 変数
+
+- SCSS変数を使用して値を統一
+
+```scss
+// ✅ GOOD
+$primary-color: #007bff;
+$spacing-unit: 8px;
+
+.button {
+    background-color: $primary-color;
+    padding: $spacing-unit * 1.5 $spacing-unit * 3;
+}
+```
+
+### ミックスイン
+
+- 再利用可能なスタイルはミックスインで定義
+
+```scss
+// ✅ GOOD
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    @include flex-center;
+}
+```
+
+## レスポンシブデザイン
+
+### メディアクエリ
+
+- モバイルファーストで記述
+
+```scss
+// ✅ GOOD
+.container {
+    padding: 16px;
+    
+    @media (min-width: 768px) {
+        padding: 24px;
+    }
+    
+    @media (min-width: 1024px) {
+        padding: 32px;
+    }
+}
+```
+
+### ブレークポイント
+
+- 一貫したブレークポイントを使用
+- 必要に応じて変数で定義
+
+```scss
+// ✅ GOOD
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+@media (min-width: $breakpoint-tablet) {
+    // ...
+}
+```
+
+## グローバルスタイル
+
+### globals.css
+
+- グローバルスタイルは `app/globals.css` に定義
+- CSS変数を使用してテーマを管理
+
+```css
+/* ✅ GOOD */
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+}
+```
+
+## パフォーマンス
+
+### 最適化
+
+- 不要なスタイルを削除
+- 大きなCSSファイルは分割を検討
+- 未使用のスタイルを削除
+
+## アクセシビリティ
+
+### コントラスト
+
+- 適切なコントラスト比を確保（WCAG AA以上）
+- カラーだけで情報を伝えない
+
+### フォントサイズ
+
+- 読みやすいフォントサイズを使用（最小16px推奨）
+- レスポンシブなフォントサイズを検討

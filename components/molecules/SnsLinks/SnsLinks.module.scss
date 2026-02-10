@@ -1,0 +1,33 @@
+.sns_links {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	align-items: center;
+}
+
+.sns_link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--section-bg);
+	color: var(--foreground);
+	transition: background 0.2s, color 0.2s;
+
+	&:hover {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+}
+
+.sns_icon {
+	width: 24px;
+	height: 24px;
+}

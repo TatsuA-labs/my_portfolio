@@ -1,6 +1,6 @@
 import styles from "@/app/play_ground/_domain/Auth/SignIn.module.scss";
 import { signIn } from "@/auth";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/atoms/Button/Button";
 
 const SignIn = () => {
 	return (

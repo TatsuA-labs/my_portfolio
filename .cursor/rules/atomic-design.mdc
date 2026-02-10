@@ -1,0 +1,116 @@
+---
+description: Atomic デザインの階層構造とコンポーネント配置ルール
+alwaysApply: true
+---
+
+# Atomic デザイン
+
+このプロジェクトは Atomic デザインを採用しています。コンポーネントを **atoms / molecules / organisms / templates / pages** の5層で階層化します。
+
+## 階層構造
+
+### 1. Atoms（原子） - `components/atoms/`
+
+最小単位のコンポーネント。それ以上分割できない。
+
+- **判断基準**: 「これ以上分割できない最小単位か？」
+- **特徴**: 
+  - props で見た目・振る舞いを制御
+  - ビジネスロジック・ストア・API に依存しない
+  - プロジェクト全体で再利用可能
+- **例**: Button, Input, Label, Icon, Spinner, Text, Heading
+- **配置**: `components/atoms/Button/Button.tsx`
+
+### 2. Molecules（分子） - `components/molecules/`
+
+Atoms を組み合わせた小さな機能単位。1つの明確な目的を持つ。
+
+- **判断基準**: 「複数の Atoms を組み合わせて1つの機能を実現しているか？かつ、どのページでも使える汎用的なものか？」
+- **特徴**:
+  - プロジェクト全体で再利用可能
+  - どのページでも使える汎用的なコンポーネント
+  - ストア・API を使用可能
+- **例**: LinkButton（Button + Link）, SearchBar（Input + Button）, FormField（Label + Input）, MessageDialog（複数の Atoms + ストア連携）
+- **配置**: `components/molecules/LinkButton/LinkButton.tsx`
+
+### 3. Organisms（生物） - `app/**/_components/_organisms/`
+
+Molecules や Atoms を組み合わせた複雑なコンポーネント。**特定のページに依存し、そのページ専用のコンポーネント。**
+
+- **判断基準**: 「特定のページ専用で、そのページ以外では使わないか？かつ、ページの主要セクション（ヘッダー、フッター、サイドバー、フォーム全体など）を構成しているか？」
+- **必須条件**: **特定のページに依存することが必須。汎用的なコンポーネントは molecules に配置する。**
+- **特徴**:
+  - 特定のページ専用（再利用不可）
+  - ページの主要セクションを構成
+- **例**: 
+  - `app/_components/_organisms/Header/Header.tsx`（トップページ専用のヘッダー）
+  - `app/_components/_organisms/Skill/Skill.tsx`（トップページ専用のスキルセクション）
+  - `app/career/_components/_organisms/CareerContent/CareerContent.tsx`（キャリアページ専用のコンテンツ）
+- **配置**: `app/**/_components/_organisms/ComponentName/ComponentName.tsx`
+- **重要**: `_components` ディレクトリは、そのページの `page.tsx` と同じ階層に作成する。
+
+### 4. Templates（テンプレート） - `app/**/_components/_templates/`
+
+Organisms を配置したページレイアウト。実際のコンテンツは持たず、構造のみを定義。
+
+- **判断基準**: 「ページ全体のレイアウト構造を定義しているか？コンテンツは props で受け取るか？特定のページ専用か？」
+- **特徴**:
+  - 特定のページ専用
+  - レイアウト構造のみを定義
+- **例**: PageLayout, PlaygroundLayout, CareerLayout
+- **配置**: `app/_components/_templates/PageLayout/PageLayout.tsx` または `app/**/_components/_templates/LayoutName/LayoutName.tsx`
+- **重要**: `_components` ディレクトリは、そのページの `page.tsx` と同じ階層に作成する。
+
+#### 本プロジェクトで Template を現状使っていない理由
+
+- **ページ構造が単純**: 各ページは「ページタイトル + コンテンツ」程度で、`page.tsx` に直接 Organisms を並べる形で足りている。
+- **共通レイアウトが少ない**: トップはタイトルブロックなし、他は「h1 + リード + hr」などページごとに少しずつ異なり、共通の Template にまとめるメリットが小さい。
+- **ルール違反ではない**: Atomic では Template は「ページ全体のレイアウト構造だけを定義し、中身は props で受け取る」想定。現状は「構造も中身も page.tsx に書く」形で運用している。
+
+#### Template の導入を検討するタイミング
+
+次のいずれかに当てはまったら、Template の導入を検討する。
+
+- 複数ページで **同じレイアウト**（例: タイトル + リード + hr + children）を共有したい場合。
+- ページ内レイアウトを一箇所で管理したい場合（例: `PageWithTitleLayout` をキャリア・遊び場・サイトについて・コンタクトで共通利用）。
+
+### 5. Pages（ページ） - `app/**/page.tsx`
+
+Templates に実際のコンテンツを入れたもの。Next.js の App Router の `page.tsx` がこれに相当。
+
+- **配置**: `app/page.tsx`, `app/career/page.tsx`, `app/play_ground/page.tsx`
+
+## コンポーネント追加時の判断フロー
+
+新規コンポーネントを追加する際は、以下の順で判断する：
+
+1. **最小単位か？** → はい → `components/atoms/`
+2. **Atoms を組み合わせた小さな機能か？かつ、どのページでも使える汎用的なものか？** → はい → `components/molecules/`
+3. **特定のページ専用で、そのページの主要セクションを構成するか？** → はい → `app/**/_components/_organisms/`（Organisms）
+4. **特定のページ専用で、ページ全体のレイアウト構造か？** → はい → `app/**/_components/_templates/`（Templates）
+5. **実際のページか？** → はい → `app/**/page.tsx`
+
+## 重要なルール
+
+### Organisms と Molecules の区別
+
+- **Molecules**: どのページでも使える汎用的なコンポーネント → `components/molecules/`
+- **Organisms**: 特定のページ専用のコンポーネント → `app/**/_components/_organisms/`
+- **判断の目安**: 「他のページでも使う可能性があるか？」で判断。使う可能性があれば Molecules、特定のページ専用なら Organisms。
+
+### 配置構造
+
+- Organisms と Templates は特定のページでのみ使用されるため、そのページの `page.tsx` と同じ階層に `_components` ディレクトリを作成し、その中に `_organisms` と `_templates` を配置する。
+- 例: `app/page.tsx` がある場合 → `app/_components/_organisms/`, `app/_components/_templates/`
+- 例: `app/career/page.tsx` がある場合 → `app/career/_components/_organisms/`, `app/career/_components/_templates/`
+
+### 依存関係
+
+- Atoms → Molecules → Organisms → Templates → Pages の順に依存する。逆方向の依存は禁止。
+- Atoms はストア・API を使用不可。Molecules 以降で使用可能。
+
+### 再利用性
+
+- Atoms と Molecules はプロジェクト全体で再利用可能（汎用的）
+- Organisms は特定のページ専用（再利用不可）
+- Templates と Pages は特定のページ専用

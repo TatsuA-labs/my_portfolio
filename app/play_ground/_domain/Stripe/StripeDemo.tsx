@@ -3,9 +3,9 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import StripeProduct from "@/app/play_ground/_domain/Stripe/_domain/StripeProductProps";
 import styles from "@/app/play_ground/_domain/Stripe/StripeDemo.module.scss";
-import ContentCard from "@/components/base/Card/ContentCard";
-import Spinner from "@/components/base/Spinner/Spinner";
-import MessageDialog from "@/components/case/Dialog/MessageDialog";
+import ContentCard from "@/components/atoms/Card/ContentCard";
+import Spinner from "@/components/atoms/Spinner/Spinner";
+import MessageDialog from "@/components/molecules/MessageDialog/MessageDialog";
 import { useModal } from "@/hooks/useModal";
 
 const statusList = ["success", "cancel"];

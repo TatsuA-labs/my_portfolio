@@ -3,10 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import "@/app/globals.css";
-import Header from "@/app/_domain/Header";
+import Footer from "@/app/_components/_organisms/Footer/Footer";
+import Header from "@/app/_components/_organisms/Header/Header";
 import styles from "@/app/layout.module.scss";
 import Loading from "@/app/loading";
-import GlobalDialog from "@/components/base/Dialog/GlobalDialogWrapper";
+import GlobalDialog from "@/components/atoms/Dialog/GlobalDialogWrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
 			>
 				<Header />
 				<Suspense fallback={<Loading />}>{children}</Suspense>
+				<Footer />
 				<GlobalDialog />
 			</body>
 		</html>

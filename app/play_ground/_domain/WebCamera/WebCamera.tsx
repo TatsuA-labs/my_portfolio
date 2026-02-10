@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/play_ground/_domain/WebCamera/WebCamera.module.scss";
-import Button from "@/components/base/Button/Button";
-import ContentCard from "@/components/base/Card/ContentCard";
+import Button from "@/components/atoms/Button/Button";
+import ContentCard from "@/components/atoms/Card/ContentCard";
 
 const WebCameraTest = () => {
 	const videoRef = useRef<HTMLVideoElement>(null);
@@ -40,11 +40,10 @@ const WebCameraTest = () => {
 						<video
 							ref={videoRef}
 							id="local-video"
+							className={styles.video}
 							autoPlay
 							playsInline
 							muted
-							width={1200}
-							height={500}
 						/>
 						<br />
 						<Button

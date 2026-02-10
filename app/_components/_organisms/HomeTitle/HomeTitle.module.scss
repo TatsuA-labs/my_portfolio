@@ -1,0 +1,70 @@
+.hero {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 96px 16px 64px;
+	max-width: 720px;
+	margin: 0 auto;
+
+	@media (max-width: 767px) {
+		padding: 64px 16px 48px;
+	}
+}
+
+.hero_photo_wrapper {
+	position: relative;
+	width: 240px;
+	height: 240px;
+	margin-bottom: 32px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.hero_photo {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.hero_title {
+	font-size: clamp(1.5rem, 4vw, 2rem);
+	font-weight: 700;
+	line-height: 1.25;
+	margin: 0 0 16px 0;
+
+	@media (max-width: 767px) {
+		font-size: 1.5rem;
+	}
+}
+
+.hero_lead {
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: var(--muted);
+	margin: 0 0 24px 0;
+	max-width: 65ch;
+}
+
+.hero_intro {
+	text-align: left;
+	max-width: 65ch;
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 0 24px 0;
+
+	p {
+		margin: 0 0 16px 0;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.hero_career {
+	font-size: 0.875rem;
+	color: var(--muted);
+	margin: 16px 0 0 0;
+}

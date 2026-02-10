@@ -3,7 +3,7 @@ import SignIn from "@/app/play_ground/_domain/Auth/SignIn";
 import SignOut from "@/app/play_ground/_domain/Auth/SignOut";
 import UserAvatar from "@/app/play_ground/_domain/Auth/UserAvatar";
 import { auth } from "@/auth";
-import ContentCard from "@/components/base/Card/ContentCard";
+import ContentCard from "@/components/atoms/Card/ContentCard";
 
 const Login = async () => {
 	const session = await auth();

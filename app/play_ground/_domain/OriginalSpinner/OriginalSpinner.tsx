@@ -1,6 +1,6 @@
 "use client";
-import ContentCard from "@/components/base/Card/ContentCard";
-import Spinner from "@/components/base/Spinner/Spinner";
+import ContentCard from "@/components/atoms/Card/ContentCard";
+import Spinner from "@/components/atoms/Spinner/Spinner";
 
 const OriginalSpinner = () => {
 	return (

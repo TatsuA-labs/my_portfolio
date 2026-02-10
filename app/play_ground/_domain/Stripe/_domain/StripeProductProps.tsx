@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "@/app/play_ground/_domain/Stripe/_domain/StripeProduct.module.scss";
 import type { Product } from "@/app/play_ground/_domain/Stripe/StripeDemo";
-import Button from "@/components/base/Button/Button";
+import Button from "@/components/atoms/Button/Button";
 
 type StripeProductProps = {
 	product: Product;

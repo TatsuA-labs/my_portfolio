@@ -1,0 +1,228 @@
+---
+description: TypeScriptスタイルガイド（https://typescript-jp.gitbook.io/deep-dive/styleguide）の遵守
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# TypeScriptスタイルガイド
+
+このプロジェクトは [TypeScriptスタイルガイド](https://typescript-jp.gitbook.io/deep-dive/styleguide) を遵守します。
+
+## 命名規則
+
+### 変数と関数
+
+- 変数と関数名には `camelCase` を使う
+- **`var` は使用禁止。`let` または `const` を使用する**
+
+```typescript
+// ❌ BAD
+var FooVar;
+var fooVar;
+function BarFunc() { }
+
+// ✅ GOOD
+const fooVar = "value";
+let mutableVar = "value";
+function barFunc() { }
+```
+
+### クラス
+
+- クラス名には `PascalCase` を使う
+- クラスメンバとメソッドには `camelCase` を使う
+
+```typescript
+// ❌ BAD
+class foo {
+    Bar: number;
+    Baz() { }
+}
+
+// ✅ GOOD
+class Foo {
+    bar: number;
+    baz() { }
+}
+```
+
+### インターフェース
+
+- 名前には `PascalCase` を使う
+- メンバには `camelCase` を使う
+- プレフィックスに `I` をつけない
+
+```typescript
+// ❌ BAD
+interface IFoo {
+    Bar: string;
+}
+
+// ✅ GOOD
+interface Foo {
+    bar: string;
+}
+```
+
+### タイプ
+
+- 名前には `PascalCase` を使う
+- メンバには `camelCase` を使う
+
+```typescript
+// ✅ GOOD
+type ButtonProps = {
+    onClick?: () => void;
+    title: string;
+};
+```
+
+### Enum（使用禁止）
+
+- **`enum` は使用禁止。代わりにオブジェクトリテラルと `as const` を使用する**
+
+```typescript
+// ❌ BAD
+enum Color {
+    Red = "Red",
+    Blue = "Blue"
+}
+
+enum DisplayType {
+    H1 = "H1",
+    H2 = "H2"
+}
+
+// ✅ GOOD - オブジェクトリテラル + as const
+const Color = {
+    Red: "Red",
+    Blue: "Blue",
+} as const;
+
+type Color = typeof Color[keyof typeof Color]; // "Red" | "Blue"
+
+const DisplayType = {
+    H1: "H1",
+    H2: "H2",
+    H3: "H3",
+    P: "P",
+    Small: "Small",
+} as const;
+
+type DisplayType = typeof DisplayType[keyof typeof DisplayType]; // "H1" | "H2" | "H3" | "P" | "Small"
+
+// 使用例
+const displayType: DisplayType = DisplayType.P;
+```
+
+**理由**:
+- `enum` は TypeScript 特有の機能で、JavaScript にコンパイル時に余分なコードが生成される
+- オブジェクトリテラル + `as const` はより軽量で、型安全性も保てる
+- 既存の JavaScript の慣習に沿っている
+
+### 名前空間
+
+- 名前に `PascalCase` を使用する
+
+```typescript
+// ❌ BAD
+namespace foo {
+}
+
+// ✅ GOOD
+namespace Foo {
+}
+```
+
+## ファイル名
+
+- `camelCase` を使ってファイルに名前を付ける
+
+例: `accordion.tsx`, `myControl.tsx`, `utils.ts`, `map.ts`
+
+## `type` vs `interface`
+
+- ユニオン型や交差型が必要な場合には `type` を使う
+
+```typescript
+type Foo = number | { someProperty: number }
+```
+
+- `extend` や `implements` をしたいときは `interface` を使う
+
+```typescript
+interface Foo {
+    foo: string;
+}
+interface FooBar extends Foo {
+    bar: string;
+}
+class X implements FooBar {
+    foo: string;
+    bar: string;
+}
+```
+
+- そうでなければ、その日あなたを幸せにするものを使用してください（このプロジェクトでは `type` を推奨）
+
+## `null` vs `undefined`
+
+- 明示的に使用不可能にするために、どちらも使用しないことを推奨（型を使用して構造を表す）
+
+```typescript
+// ❌ BAD
+let foo = { x: 123, y: undefined };
+
+// ✅ GOOD
+let foo: { x: number, y?: number } = { x: 123 };
+```
+
+- 一般的に `undefined` を使用（代わりに `{valid:boolean,value?:Foo}` のようなオブジェクトを返すことを検討）
+
+```typescript
+// ❌ BAD
+return null;
+
+// ✅ GOOD
+return undefined;
+```
+
+- APIまたは従来のAPIの一部である場合は `null` を使用（Node.jsの慣例通り）
+
+- `== null`/`!= null` (`===`/`!==` ではない) を使い、プリミティブに `null`/`undefined` をチェック
+
+```typescript
+// ❌ BAD
+if (error !== null) // undefinedを除外しない
+
+// ✅ GOOD
+if (error != null) // nullもundefinedも除外する
+```
+
+## 配列
+
+- 配列に `foos: Array<Foo>` の代わりに `foos: Foo[]` として配列にアノテーションをつける
+
+```typescript
+// ❌ BAD
+foos: Array<Foo>
+
+// ✅ GOOD
+foos: Foo[]
+```
+
+## 比較演算子
+
+- `===` を使用（TypeScriptのコードベースで使われている）
+
+## セミコロン
+
+- セミコロンを使用する
+
+> 理由：明示的なセミコロンは、言語書式設定ツールで一貫した結果を得るのに役立ちます。
+
+## フォーマット
+
+- Biome の設定に従う（`biome.json` 参照）
+  - インデント: タブ、幅2
+  - 引用符: ダブルクォート（プロジェクト設定に合わせる）

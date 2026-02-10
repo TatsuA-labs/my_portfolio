@@ -1,10 +1,21 @@
 .products {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
+.product {
+	width: 100%;
+}
+
 .product_list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: 100%;
+
+	@media (max-width: 767px) {
+		flex-direction: column;
+		gap: 16px;
+	}
 }

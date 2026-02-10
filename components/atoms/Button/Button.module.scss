@@ -1,0 +1,40 @@
+.button {
+	min-height: 44px;
+	padding: 12px 24px;
+	background: var(--accent);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+
+	&:hover:not(:disabled) {
+		background: color-mix(in srgb, var(--accent) 90%, black);
+	}
+
+	&:active:not(:disabled) {
+		background: color-mix(in srgb, var(--accent) 80%, black);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		&:hover:not(:disabled) {
+			background: color-mix(in srgb, var(--accent) 90%, white);
+		}
+
+		&:active:not(:disabled) {
+			background: color-mix(in srgb, var(--accent) 80%, white);
+		}
+	}
+}

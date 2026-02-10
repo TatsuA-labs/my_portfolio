@@ -1,13 +1,28 @@
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
 }
+
 .contents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+}
+
+.section_wrapper {
+	width: 100%;
+	padding: 64px 16px;
+
+	@media (max-width: 767px) {
+		padding: 48px 16px;
+	}
+
+	&:nth-child(even) {
+		background: var(--section-bg);
+	}
 }

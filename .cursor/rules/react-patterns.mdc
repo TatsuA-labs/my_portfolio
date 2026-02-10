@@ -1,0 +1,233 @@
+---
+description: React 19 + Next.js 15 App Router のベストプラクティス
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React パターン
+
+このプロジェクトは React 19 と Next.js 15（App Router）を使用しています。
+
+## コンポーネント
+
+### 関数コンポーネント
+
+- 関数コンポーネントを使用する
+- コンポーネント名は `PascalCase`
+
+```typescript
+// ✅ GOOD
+const Button = ({ onClick, title }: ButtonProps) => {
+    return <button onClick={onClick}>{title}</button>;
+};
+
+export default Button;
+```
+
+### Props の型定義
+
+- Props の型は `type` を使用（`ComponentNameProps` の命名規則）
+
+```typescript
+// ✅ GOOD
+type ButtonProps = {
+    onClick?: () => void;
+    title: string;
+    type?: "button" | "submit" | "reset";
+    color?: "primary" | "secondary";
+};
+
+const Button = ({ onClick, title, type = "button", color = "primary" }: ButtonProps) => {
+    // ...
+};
+```
+
+### デフォルト値
+
+- デフォルト値は分割代入で設定
+
+```typescript
+// ✅ GOOD
+const Button = ({ 
+    onClick, 
+    title, 
+    type = "button", 
+    color = "primary" 
+}: ButtonProps) => {
+    // ...
+};
+```
+
+## Hooks
+
+### useState
+
+- 型を明示的に指定
+
+```typescript
+// ✅ GOOD
+const [count, setCount] = useState<number>(0);
+const [displayType, setDisplayType] = useState<DisplayType>(DisplayType.P);
+```
+
+### カスタムフック
+
+- カスタムフックは `hooks/` ディレクトリに配置
+- 名前は `use` で始める
+
+```typescript
+// ✅ GOOD
+// hooks/useModal.ts
+export const useModal = () => {
+    // ...
+};
+```
+
+## Next.js App Router
+
+### クライアントコンポーネント
+
+- インタラクティブなコンポーネントには `"use client"` ディレクティブを追加
+
+```typescript
+// ✅ GOOD
+"use client";
+import { useState } from "react";
+
+const CountUp = () => {
+    // ...
+};
+```
+
+### サーバーコンポーネント
+
+- デフォルトでサーバーコンポーネント（`"use client"` がない場合）
+
+### ページコンポーネント
+
+- `app/**/page.tsx` でページを定義
+- デフォルトエクスポートを使用
+
+```typescript
+// ✅ GOOD
+// app/career/page.tsx
+export default function CareerPage() {
+    return <div>Career</div>;
+}
+```
+
+### ルーティング
+
+- ファイルベースのルーティングを使用
+- `app/` ディレクトリ内のフォルダ構造がルートになる
+
+## 状態管理
+
+### Zustand
+
+- グローバル状態は Zustand を使用
+- ストアは `stores/` ディレクトリに配置
+
+```typescript
+// ✅ GOOD
+// stores/modalStore.ts
+import { create } from "zustand";
+
+type ModalStore = {
+    isOpen: boolean;
+    openModal: () => void;
+    closeModal: () => void;
+};
+
+export const useModalStore = create<ModalStore>((set) => ({
+    isOpen: false,
+    openModal: () => set({ isOpen: true }),
+    closeModal: () => set({ isOpen: false }),
+}));
+```
+
+## パフォーマンス
+
+### メモ化
+
+- 必要に応じて `useMemo` や `useCallback` を使用
+- 過度な最適化は避ける
+
+### コード分割
+
+- Next.js の自動コード分割を活用
+- 大きなコンポーネントは動的インポートを検討
+
+## エラーハンドリング
+
+- エラーバウンダリを使用（必要に応じて）
+- 適切なエラーメッセージを表示
+
+## アクセシビリティ
+
+- セマンティックHTMLを使用
+- 適切な `aria-*` 属性を追加
+- キーボード操作をサポート
+- **複雑なUIコンポーネント（Dialog、Dropdown、Menu、Select など）は Radix UI または Headless UI を使用する**
+  - アクセシビリティ（ARIA属性、キーボード操作、フォーカス管理）が自動的に実装される
+  - カスタム実装よりも、これらのライブラリを使用してアクセシビリティを確保する
+
+## UIコンポーネントライブラリ
+
+### Radix UI（推奨）
+
+- **Radix UI（`@radix-ui/react-*`）を優先使用する**
+- 必要なコンポーネントのみ個別にインストール（Tree-shaking対応）
+
+```typescript
+// ✅ GOOD - Radix UI Dialog
+import * as Dialog from "@radix-ui/react-dialog";
+
+const MyDialog = ({ isOpen, onClose }: DialogProps) => {
+    return (
+        <Dialog.Root open={isOpen} onOpenChange={onClose}>
+            <Dialog.Portal>
+                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Content className={styles.content}>
+                    <Dialog.Title>タイトル</Dialog.Title>
+                    <Dialog.Description>説明文</Dialog.Description>
+                    <Dialog.Close className={styles.close}>閉じる</Dialog.Close>
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    );
+};
+```
+
+**利用可能なコンポーネント**:
+- Radix UI のすべてのコンポーネントを利用可能（制限なし）
+- よく使うコンポーネント: Dialog、Dropdown Menu、Select、Tabs、Popover、Tooltip、Accordion、Checkbox、Radio Group、Switch など
+- 必要に応じて [Radix UI公式サイト](https://www.radix-ui.com/primitives/docs/overview/introduction) から適切なコンポーネントを選択して使用する
+
+**メリットを最大限活用する実装方法**:
+
+1. **必要なコンポーネントのみインストール**: Tree-shaking を活用し、バンドルサイズを最適化
+2. **適切な使用タイミング**: 複雑なインタラクションやアクセシビリティが重要な場合に使用
+3. **Atomic デザインとの統合**: Atoms/Molecules/Organisms の各層で適切に使用
+4. **CSS Modules + SCSS でスタイリング**: プロジェクトのスタイルシステムと統合
+5. **動的インポートの検討**: 大きなコンポーネントは必要に応じて動的インポート
+
+### Headless UI（補助的）
+
+- Radix UI で対応できない場合や、よりシンプルな実装が必要な場合に使用
+
+```typescript
+// ✅ GOOD - Headless UI（Radix UIで対応できない場合のみ）
+import { Dialog } from "@headlessui/react";
+
+const MyDialog = ({ isOpen, onClose }: DialogProps) => {
+    return (
+        <Dialog open={isOpen} onClose={onClose}>
+            <Dialog.Panel className={styles.panel}>
+                <Dialog.Title>タイトル</Dialog.Title>
+                <Dialog.Description>説明文</Dialog.Description>
+            </Dialog.Panel>
+        </Dialog>
+    );
+};
+```

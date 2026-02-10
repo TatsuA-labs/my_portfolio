@@ -1,0 +1,63 @@
+.feature_card {
+	background: var(--background);
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 8px;
+	padding: 16px; // --sm
+	transition: box-shadow 0.2s;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	@media (prefers-color-scheme: dark) {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	&:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+}
+
+.feature_created {
+	font-size: 0.875rem;
+	color: var(--muted);
+	font-weight: 400;
+	margin-bottom: 8px; // --xs
+}
+
+.feature_title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0 0 8px 0; // --xs
+}
+
+.feature_description {
+	font-size: 1rem;
+	color: var(--muted);
+	line-height: 1.7;
+	margin-bottom: 24px; // --md
+}
+
+.feature_demo {
+	min-height: 200px;
+	background: var(--section-bg);
+	border-radius: 4px;
+	padding: 16px; // --sm
+
+	// ContentCardのタイトルと作成日を非表示にする（FeatureCardで表示するため）
+	:global(.content_wrapper) {
+		gap: 0;
+	}
+
+	:global(.content_wrapper > small),
+	:global(.content_wrapper > h3) {
+		display: none;
+	}
+
+	:global(.content) {
+		border: none;
+		border-radius: 0;
+		padding: 0;
+		background: transparent;
+	}
+}

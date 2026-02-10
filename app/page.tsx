@@ -1,9 +1,12 @@
-import Achievement from "app/_domain/Achievement/Achievement";
-import HomeTitle from "app/_domain/HomeTitle";
-import Award from "@/app/_domain/Award/Award";
-import Skill from "@/app/_domain/Skill/Skill";
+import Achievement from "@/app/_components/_organisms/Achievement/Achievement";
+import Award from "@/app/_components/_organisms/Award/Award";
+import Cta from "@/app/_components/_organisms/Cta/Cta";
+import HomeTitle from "@/app/_components/_organisms/HomeTitle/HomeTitle";
+import Skill from "@/app/_components/_organisms/Skill/Skill";
 import styles from "@/app/page.module.scss";
-import { fetchSheetData } from "@/utils/fetchSheetData";
+import { fetchSheetData } from "@/lib/api/fetchSheetData";
+
+export const dynamic = "force-static";
 
 export type AwardSheet = {
 	data: {
@@ -45,40 +48,42 @@ export type LangSheet = {
 };
 
 const Page = async () => {
-	let awards: AwardSheet = { data: [] };
-	let achievements: AchievementSheet = { data: [] };
-	let frameworks: FrameworkSheet = { data: [] };
-	let langs: LangSheet = { data: [] };
+	let awardsData: AwardSheet = { data: [] };
+	let achievementsData: AchievementSheet = { data: [] };
+	let frameworksData: FrameworkSheet = { data: [] };
+	let langsData: LangSheet = { data: [] };
 
 	try {
-		const [awardsData, achievementsData, frameworksData, langsData]: [
-			AwardSheet,
-			AchievementSheet,
-			FrameworkSheet,
-			LangSheet,
-		] = await Promise.all([
-			fetchSheetData(process.env.SHEET_AWARD),
-			fetchSheetData(process.env.SHEET_ACHIEVEMENT),
-			fetchSheetData(process.env.SHEET_SKILL_FW),
-			fetchSheetData(process.env.SHEET_SKILL_LANG),
-		]);
-		awards = awardsData;
-		achievements = achievementsData;
-		frameworks = frameworksData;
-		langs = langsData;
+		[awardsData, achievementsData, frameworksData, langsData] =
+			await Promise.all([
+				fetchSheetData(process.env.SHEET_AWARD),
+				fetchSheetData(process.env.SHEET_ACHIEVEMENT),
+				fetchSheetData(process.env.SHEET_SKILL_FW),
+				fetchSheetData(process.env.SHEET_SKILL_LANG),
+			]);
 	} catch (error) {
 		console.error("データの取得に失敗しました:", error);
 	}
 
 	return (
-		<div className={styles.page}>
-			<HomeTitle />
+		<main className={styles.page}>
+			<HomeTitle
+				githubUrl={process.env.NEXT_PUBLIC_GITHUB_URL}
+				linkedinUrl={process.env.NEXT_PUBLIC_LINKEDIN_URL}
+			/>
 			<div className={styles.contents}>
-				<Award awards={awards} />
-				<Achievement achievements={achievements} />
-				<Skill frameworks={frameworks} langs={langs} />
+				<div className={styles.section_wrapper}>
+					<Skill frameworksData={frameworksData} langsData={langsData} />
+				</div>
+				<div className={styles.section_wrapper}>
+					<Achievement achievementsData={achievementsData} />
+				</div>
+				<div className={styles.section_wrapper}>
+					<Award awardsData={awardsData} />
+				</div>
+				<Cta />
 			</div>
-		</div>
+		</main>
 	);
 };
 

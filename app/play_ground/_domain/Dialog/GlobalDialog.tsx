@@ -1,8 +1,8 @@
 "use client";
 import styles from "@/app/play_ground/_domain/Dialog/GlobalDialog.module.scss";
-import Button from "@/components/base/Button/Button";
-import ContentCard from "@/components/base/Card/ContentCard";
-import MessageDialog from "@/components/case/Dialog/MessageDialog";
+import Button from "@/components/atoms/Button/Button";
+import ContentCard from "@/components/atoms/Card/ContentCard";
+import MessageDialog from "@/components/molecules/MessageDialog/MessageDialog";
 import { useModal } from "@/hooks/useModal";
 
 const GlobalDialog = () => {
