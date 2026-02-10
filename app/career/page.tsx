@@ -1,7 +1,7 @@
 import CareerSection from "@/app/career/_components/_organisms/CareerSection/CareerSection";
 import SchoolSection from "@/app/career/_components/_organisms/SchoolSection/SchoolSection";
-import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 import styles from "@/app/career/page.module.scss";
+import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 import { fetchSheetData } from "@/lib/api/fetchSheetData";
 import { parseAdditional, parseProject } from "@/utils/parseSheetData";
 

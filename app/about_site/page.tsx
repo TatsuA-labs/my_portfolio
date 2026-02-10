@@ -1,8 +1,8 @@
 import AboutSiteSection from "@/app/about_site/_components/_organisms/AboutSiteSection/AboutSiteSection";
 import AIDevelopmentSection from "@/app/about_site/_components/_organisms/AIDevelopmentSection/AIDevelopmentSection";
 import TechStackSection from "@/app/about_site/_components/_organisms/TechStackSection/TechStackSection";
-import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 import styles from "@/app/about_site/page.module.scss";
+import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 
 const Page = () => {
 	return (

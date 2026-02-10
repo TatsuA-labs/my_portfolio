@@ -1,6 +1,6 @@
-import ExternalLinks from "@/components/molecules/ExternalLinks/ExternalLinks";
 import Link from "next/link";
 import { HiExternalLink } from "react-icons/hi";
+import ExternalLinks from "@/components/molecules/ExternalLinks/ExternalLinks";
 import styles from "./SchoolCard.module.scss";
 
 type Additional = {

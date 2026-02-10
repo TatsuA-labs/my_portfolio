@@ -14,7 +14,10 @@ const MessageDialog = ({ title, message }: MessageDialogProps) => {
 	return (
 		<>
 			<Dialog.Title className={styles.title}>{title}</Dialog.Title>
-			<Dialog.Description className={styles.description} id="dialog-description">
+			<Dialog.Description
+				className={styles.description}
+				id="dialog-description"
+			>
 				{message}
 			</Dialog.Description>
 			<div className={styles.button_wrapper}>

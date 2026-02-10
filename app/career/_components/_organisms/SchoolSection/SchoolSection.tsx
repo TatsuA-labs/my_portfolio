@@ -28,7 +28,7 @@ const SchoolSection = ({ schools }: SchoolSectionProps) => {
 				<h2 id="school-title" className={styles.section_title}>
 					学歴
 				</h2>
-				<hr className={styles.section_hr} aria-hidden="true" />
+				<hr className={styles.section_hr} />
 				<div className={styles.cards}>
 					{sortedSchools.map((school) => (
 						<SchoolCard

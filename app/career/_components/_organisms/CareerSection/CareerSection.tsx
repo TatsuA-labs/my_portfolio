@@ -30,7 +30,7 @@ const CareerSection = ({ careers }: CareerSectionProps) => {
 				<h2 id="career-title" className={styles.section_title}>
 					職歴
 				</h2>
-				<hr className={styles.section_hr} aria-hidden="true" />
+				<hr className={styles.section_hr} />
 				<div className={styles.cards}>
 					{sortedCareers.map((career) => (
 						<CareerCard

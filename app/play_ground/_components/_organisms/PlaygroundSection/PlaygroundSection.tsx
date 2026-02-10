@@ -19,11 +19,16 @@ type PlaygroundSectionProps = {
 	features: Feature[];
 };
 
-const PlaygroundSection = ({ categories, features }: PlaygroundSectionProps) => {
+const PlaygroundSection = ({
+	categories,
+	features,
+}: PlaygroundSectionProps) => {
 	return (
 		<>
 			{categories.map((category) => {
-				const categoryFeatures = features.filter((feature) => feature.category === category.id);
+				const categoryFeatures = features.filter(
+					(feature) => feature.category === category.id,
+				);
 				return (
 					<CategoryGroup
 						key={category.id}

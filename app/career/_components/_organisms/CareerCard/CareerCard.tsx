@@ -1,7 +1,7 @@
-import ExternalLinks from "@/components/molecules/ExternalLinks/ExternalLinks";
-import ProjectTags from "@/components/molecules/ProjectTags/ProjectTags";
 import Link from "next/link";
 import { HiExternalLink } from "react-icons/hi";
+import ExternalLinks from "@/components/molecules/ExternalLinks/ExternalLinks";
+import ProjectTags from "@/components/molecules/ProjectTags/ProjectTags";
 import styles from "./CareerCard.module.scss";
 
 type Additional = {

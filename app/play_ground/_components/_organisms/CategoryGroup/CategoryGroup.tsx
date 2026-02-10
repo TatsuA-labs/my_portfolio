@@ -16,11 +16,19 @@ type CategoryGroupProps = {
 	features: Feature[];
 };
 
-const CategoryGroup = ({ categoryId, categoryName, features }: CategoryGroupProps) => {
+const CategoryGroup = ({
+	categoryId,
+	categoryName,
+	features,
+}: CategoryGroupProps) => {
 	if (features.length === 0) return null;
 
 	return (
-		<section id={categoryId} className={styles.category_group} aria-labelledby={`${categoryId}-title`}>
+		<section
+			id={categoryId}
+			className={styles.category_group}
+			aria-labelledby={`${categoryId}-title`}
+		>
 			<div className={styles.category_inner}>
 				<h2 id={`${categoryId}-title`} className={styles.category_title}>
 					{categoryName}

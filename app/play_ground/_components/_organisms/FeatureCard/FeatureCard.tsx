@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import type { ComponentType } from "react";
+import { Suspense } from "react";
 import Spinner from "@/app/play_ground/_domain/OriginalSpinner/OriginalSpinner";
 import styles from "./FeatureCard.module.scss";
 
@@ -10,7 +10,12 @@ type FeatureCardProps = {
 	component: ComponentType;
 };
 
-const FeatureCard = ({ title, description, created, component: Component }: FeatureCardProps) => {
+const FeatureCard = ({
+	title,
+	description,
+	created,
+	component: Component,
+}: FeatureCardProps) => {
 	return (
 		<article className={styles.feature_card}>
 			{created && <div className={styles.feature_created}>{created}</div>}

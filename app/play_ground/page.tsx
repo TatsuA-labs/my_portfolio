@@ -1,6 +1,5 @@
 import CategoryList from "@/app/play_ground/_components/_organisms/CategoryList/CategoryList";
 import PlaygroundSection from "@/app/play_ground/_components/_organisms/PlaygroundSection/PlaygroundSection";
-import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 import Login from "@/app/play_ground/_domain/Auth/Login";
 import CountUp from "@/app/play_ground/_domain/CountUp/CountUp";
 import DamageEffect from "@/app/play_ground/_domain/DamageEffect/DamageEffect";
@@ -10,6 +9,7 @@ import StripeDemo from "@/app/play_ground/_domain/Stripe/StripeDemo";
 import TransformAnimation from "@/app/play_ground/_domain/TransformAnimation/TransformAnimation";
 import WebCamera from "@/app/play_ground/_domain/WebCamera/WebCamera";
 import styles from "@/app/play_ground/page.module.scss";
+import PageTitle from "@/components/molecules/PageTitle/PageTitle";
 
 type Feature = {
 	id: number;
@@ -38,7 +38,8 @@ const Page = () => {
 		{
 			id: 1,
 			title: "要素をアニメーションで動かす",
-			description: "CSS Transformを使用したアニメーション効果のデモです。要素を回転・拡大・移動させることができます。",
+			description:
+				"CSS Transformを使用したアニメーション効果のデモです。要素を回転・拡大・移動させることができます。",
 			category: "animation",
 			component: TransformAnimation,
 			created: "2025-02-26",
@@ -46,7 +47,8 @@ const Page = () => {
 		{
 			id: 2,
 			title: "数値の上昇の表現",
-			description: "数値が0から指定した値までアニメーションで上昇するデモです。値に応じてフォントサイズも変化します。",
+			description:
+				"数値が0から指定した値までアニメーションで上昇するデモです。値に応じてフォントサイズも変化します。",
 			category: "animation",
 			component: CountUp,
 			created: "2025-02-26",
@@ -54,7 +56,8 @@ const Page = () => {
 		{
 			id: 3,
 			title: "星空エフェクト（ランダム）",
-			description: "ランダムな位置にエフェクトを表示するデモです。エフェクトの数や表示間隔を調整できます。",
+			description:
+				"ランダムな位置にエフェクトを表示するデモです。エフェクトの数や表示間隔を調整できます。",
 			category: "animation",
 			component: DamageEffect,
 			created: "2025-02-27",

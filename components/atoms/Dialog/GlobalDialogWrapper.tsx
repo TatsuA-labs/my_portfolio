@@ -10,9 +10,7 @@ const GlobalDialogWrapper = () => {
 		<Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeModal()}>
 			<Dialog.Portal>
 				<Dialog.Overlay className={styles.overlay} />
-				<Dialog.Content className={styles.content}>
-					{content}
-				</Dialog.Content>
+				<Dialog.Content className={styles.content}>{content}</Dialog.Content>
 			</Dialog.Portal>
 		</Dialog.Root>
 	);

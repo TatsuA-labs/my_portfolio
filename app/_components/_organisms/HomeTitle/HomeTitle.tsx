@@ -31,7 +31,8 @@ const HomeTitle = ({ githubUrl, linkedinUrl }: HomeTitleProps) => {
 					チーム開発では、技術的な課題解決とメンバー間の連携の両面から、プロジェクトの成功に貢献してきました。最新技術の習得と実践を心がけています。
 				</p>
 				<p>
-					フロントエンドを中心に、UI/UX の改善やパフォーマンス最適化に取り組み、ユーザー体験を高める開発をしています。
+					フロントエンドを中心に、UI/UX
+					の改善やパフォーマンス最適化に取り組み、ユーザー体験を高める開発をしています。
 				</p>
 			</div>
 			<SnsLinks githubUrl={githubUrl} linkedinUrl={linkedinUrl} />

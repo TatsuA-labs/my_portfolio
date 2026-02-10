@@ -12,7 +12,10 @@ type CategoryListProps = {
 };
 
 const CategoryList = ({ categories }: CategoryListProps) => {
-	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, categoryId: string) => {
+	const handleClick = (
+		e: React.MouseEvent<HTMLAnchorElement>,
+		categoryId: string,
+	) => {
 		e.preventDefault();
 		const targetElement = document.getElementById(categoryId);
 		if (targetElement) {
@@ -21,12 +24,18 @@ const CategoryList = ({ categories }: CategoryListProps) => {
 	};
 
 	return (
-		<section className={styles.category_list} aria-labelledby="category-list-title">
+		<section
+			className={styles.category_list}
+			aria-labelledby="category-list-title"
+		>
 			<div className={styles.category_list_inner}>
 				<h2 id="category-list-title" className={styles.category_list_title}>
 					カテゴリ一覧
 				</h2>
-				<nav className={styles.category_links} aria-label="カテゴリナビゲーション">
+				<nav
+					className={styles.category_links}
+					aria-label="カテゴリナビゲーション"
+				>
 					{categories.map((category) => (
 						<Link
 							key={category.id}

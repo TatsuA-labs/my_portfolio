@@ -49,10 +49,7 @@ const workflowSteps: WorkflowStep[] = [
 		step: 5,
 		title: "レビュー・セキュリティチェック",
 		description: "実装の品質確認に加え、セキュリティチェックを行う。",
-		details: [
-			"コードレビュー",
-			"セキュリティチェック",
-		],
+		details: ["コードレビュー", "セキュリティチェック"],
 	},
 	{
 		step: 6,
